@@ -3,11 +3,14 @@
 Each claim is (what, the exact LaTeX fragment in the paper, the number recomputed from the result files). A claim
 passes when the recomputed number appears in the fragment and the fragment appears in main.tex or appendix.tex.
 Numbers inside tables are generated from results/ by src/make_tables.py and are not repeated here.
+Wall-clock timings (TIMING_CLAIMS) depend on the machine and its load, so for them only the order of magnitude is
+checked: the recomputed value must lie within a factor of 10 of the paper's.
 Exit status 1 on any failure.
 """
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -143,14 +146,23 @@ CLAIMS = [
 ]
 
 
+TIMING_CLAIMS = {"ms per asteroid"}
+
+
 def main() -> None:
-    bad = []
+    bad, timing = [], []
     for what, frag, val in CLAIMS:
         ok_text = frag in TEX
-        ok_val = val in frag
+        if what in TIMING_CLAIMS:
+            paper = float(re.search(r"[0-9]+(?:\.[0-9]+)?", frag).group())
+            ok_val = paper / 10 <= float(val) <= paper * 10
+            timing.append(f"  timing, {what}: paper {paper:g}, this run {val} (machine-dependent; within 10x: {ok_val})")
+        else:
+            ok_val = val in frag
         if not (ok_text and ok_val):
             bad.append((what, frag, val, ok_text, ok_val))
     print(f"{len(CLAIMS) - len(bad)} of {len(CLAIMS)} paper numbers recomputed from results/ and found in the LaTeX source")
+    print("\n".join(timing))
     for what, frag, val, ok_text, ok_val in bad:
         print(f"  FAIL {what}: recomputed {val!r}; fragment in paper: {ok_text}; value in fragment: {ok_val}\n       {frag}")
     sys.exit(1 if bad else 0)

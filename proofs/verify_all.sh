@@ -7,7 +7,10 @@
 #   5. every key number in the paper's text recomputed from results/ (proofs/check_paper_numbers.py)
 #   6. every number in the video narration recomputed from results/
 #   7. SHA-256 checksums of the data the results were computed from
-# Steps 4-6 read results/; run ./run_all.sh first on a fresh checkout.
+#   8. SHA-256 check of the received score sheet and the three NASA files delivered with it (data/external)
+#   9. the score-sheet comparison recomputed independently (proofs/check_sheet_comparison.py)
+#  10. the Kaggle notebook run on the snapshot reproduces results/ (proofs/check_notebook.py)
+# Steps 4-6, 9 and 10 read results/; run ./run_all.sh first on a fresh checkout.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 PY="$PWD/.venv/bin/python"
@@ -36,6 +39,10 @@ run "6. Video narration numbers recomputed from results/" \
     "$PY" -c "import sys; sys.path.insert(0, 'presentation'); import make_video; make_video.check_numbers()"
 run "7. Data checksums (SHA-256)" shasum -a 256 data/processed/sbdb_neo.csv data/processed/cad_earth.csv \
     data/kaggle/nasa-asteroids-classification/nasa.csv
+run "8. Received score sheet and delivered NASA files (SHA-256 verified)" \
+    bash -c "cd data/external && shasum -a 256 -c SHA256SUMS.txt"
+run "9. Score-sheet comparison recomputed independently" "$PY" proofs/check_sheet_comparison.py
+run "10. Kaggle notebook reproduces the results" "$PY" proofs/check_notebook.py
 rm -f proofs/pha_law_check
 echo
 if [ "$FAILED" = 0 ]; then echo "ALL CHECKS PASS -> $OUT"; else echo "SOME CHECKS FAILED -> $OUT"; exit 1; fi

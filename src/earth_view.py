@@ -14,7 +14,6 @@ import time
 
 import numpy as np
 import pandas as pd
-from lightgbm import LGBMClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import StratifiedGroupKFold, StratifiedKFold
@@ -22,7 +21,6 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
-from xgboost import XGBClassifier
 
 from common import AU_KM, N_FOLDS, PROC, RESULTS, SEED, binary_metrics, load_sbdb, neows_diameters_km, save_json, summarize_folds
 
@@ -42,6 +40,9 @@ def build_dataset() -> pd.DataFrame:
 
 
 def make_models() -> dict:
+    # imported here, not at module level: sheet_comparison.py imports this module next to GPBoost (a LightGBM fork)
+    from lightgbm import LGBMClassifier
+    from xgboost import XGBClassifier
     return {
         "LogReg": make_pipeline(StandardScaler(), LogisticRegression(max_iter=2000)),
         "KNN": make_pipeline(StandardScaler(), KNeighborsClassifier(n_neighbors=5, n_jobs=-1)),

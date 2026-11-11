@@ -5,7 +5,8 @@
 #                             (datasets/neo_datasets_2026-11-11.zip, checked against its SHA-256 sums)
 #   ./run_all.sh              download fresh data first (JPL updates daily, so numbers shift slightly)
 #
-# About 30-35 minutes on a laptop. Needs uv, a C compiler and tectonic.
+# About 1.5 hours on a laptop (45 minutes of it the score-sheet comparison). Needs uv, a C compiler, tectonic and,
+# on macOS, OpenMP for LightGBM, XGBoost and GPBoost (brew install libomp).
 set -euo pipefail
 cd "$(dirname "$0")"
 SNAPSHOT=0
@@ -52,6 +53,9 @@ if [ ! -f "$K/nasa.csv" ]; then
   (cd "$K" && unzip -o -q nasa-asteroids-classification.zip nasa.csv)
 fi
 "$PY" -I kaggle_compare.py "$K/nasa.csv"
+# The received score sheet's three models (CNN, GPBoost, tuned RF) vs ours on the delivered NASA files and full CAD
+"$PY" sheet_comparison.py
+"$PY" make_sheet_xlsx.py                             # the same comparison as an Excel workbook
 "$PY" uncertainty.py --codes 5-7 --scales 0.25,0.5,1,2   # uncertain orbits, moderately determined profiles
 "$PY" uncertainty.py --codes 8-9 --scales 0.25,0.5,1,2   # uncertain orbits, short-arc profiles
 "$PY" verify_proofs.py                              # numerical checks of every statement in Appendix A

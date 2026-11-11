@@ -1,0 +1,799 @@
+{
+  "sheet": {
+    "file": "NASA_Asteroid_Final_Comparative_Results.xlsx",
+    "sha256": "b6d44747257d7fbcc804b3caac1cdebac5ce5fd5bd8aa325dbef2f10b912c5c1",
+    "rows": [
+      {
+        "dataset": "NASA CAD",
+        "model": "CNN",
+        "accuracy": 0.7245696400625978,
+        "precision": 0.7585034013605442,
+        "recall": 0.6798780487804879,
+        "f1": 0.7170418006430869,
+        "roc_auc": 0.8003097796251275,
+        "n": 639,
+        "positives": 328,
+        "TP": 223,
+        "FP": 71,
+        "FN": 105,
+        "TN": 240,
+        "auc_consistent_with_counts": true,
+        "accuracy_wilson95": [
+          0.688667982134606,
+          0.7577873546127335
+        ],
+        "majority_class_accuracy": 0.513302034428795,
+        "predicted_positive": 294
+      },
+      {
+        "dataset": "NASA CAD",
+        "model": "GPBoost",
+        "accuracy": 0.7230046948356808,
+        "precision": 0.7396825396825397,
+        "recall": 0.7103658536585366,
+        "f1": 0.7247278382581649,
+        "roc_auc": 0.7988785193318171,
+        "n": 639,
+        "positives": 328,
+        "TP": 233,
+        "FP": 82,
+        "FN": 95,
+        "TN": 229,
+        "auc_consistent_with_counts": true,
+        "accuracy_wilson95": [
+          0.6870522468714224,
+          0.7562919028602563
+        ],
+        "majority_class_accuracy": 0.513302034428795,
+        "predicted_positive": 315
+      },
+      {
+        "dataset": "NASA CAD",
+        "model": "Tuned Random Forest",
+        "accuracy": 0.7449139280125195,
+        "precision": 0.7796610169491526,
+        "recall": 0.7012195121951219,
+        "f1": 0.7383627608346709,
+        "roc_auc": 0.7991039918437769,
+        "n": 639,
+        "positives": 328,
+        "TP": 230,
+        "FP": 65,
+        "FN": 98,
+        "TN": 246,
+        "auc_consistent_with_counts": true,
+        "accuracy_wilson95": [
+          0.7097215125698043,
+          0.777179255381127
+        ],
+        "majority_class_accuracy": 0.513302034428795,
+        "predicted_positive": 295
+      },
+      {
+        "dataset": "NASA SCOUT",
+        "model": "CNN",
+        "accuracy": 0.6666666666666666,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "roc_auc": 0.5555555555555556,
+        "n": 9,
+        "positives": 3,
+        "TP": 0,
+        "FP": 0,
+        "FN": 3,
+        "TN": 6,
+        "auc_consistent_with_counts": true,
+        "accuracy_wilson95": [
+          0.3542021335250587,
+          0.8794161825659265
+        ],
+        "majority_class_accuracy": 0.6666666666666666,
+        "predicted_positive": 0
+      },
+      {
+        "dataset": "NASA SCOUT",
+        "model": "GPBoost",
+        "accuracy": 0.4444444444444444,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "roc_auc": 0.5,
+        "n": 9,
+        "positives": 3,
+        "TP": 0,
+        "FP": 2,
+        "FN": 3,
+        "TN": 4,
+        "auc_consistent_with_counts": true,
+        "accuracy_wilson95": [
+          0.18877851977054566,
+          0.7333487081991259
+        ],
+        "majority_class_accuracy": 0.6666666666666666,
+        "predicted_positive": 2
+      },
+      {
+        "dataset": "NASA SCOUT",
+        "model": "Tuned Random Forest",
+        "accuracy": 0.4444444444444444,
+        "precision": 0.375,
+        "recall": 1.0,
+        "f1": 0.5454545454545454,
+        "roc_auc": 0.8611111111111112,
+        "n": 9,
+        "positives": 3,
+        "TP": 3,
+        "FP": 5,
+        "FN": 0,
+        "TN": 1,
+        "auc_consistent_with_counts": true,
+        "accuracy_wilson95": [
+          0.18877851977054566,
+          0.7333487081991259
+        ],
+        "majority_class_accuracy": 0.6666666666666666,
+        "predicted_positive": 8
+      },
+      {
+        "dataset": "NASA SENTRY",
+        "model": "CNN",
+        "accuracy": 0.7309644670050761,
+        "precision": 0.7595628415300546,
+        "recall": 0.6915422885572139,
+        "f1": 0.7239583333333334,
+        "roc_auc": 0.8064341504910679,
+        "n": 394,
+        "positives": 201,
+        "TP": 139,
+        "FP": 44,
+        "FN": 62,
+        "TN": 149,
+        "auc_consistent_with_counts": true,
+        "accuracy_wilson95": [
+          0.6851014349615708,
+          0.7723672273336359
+        ],
+        "majority_class_accuracy": 0.5101522842639594,
+        "predicted_positive": 183
+      },
+      {
+        "dataset": "NASA SENTRY",
+        "model": "GPBoost",
+        "accuracy": 0.751269035532995,
+        "precision": 0.7845303867403315,
+        "recall": 0.7064676616915423,
+        "f1": 0.743455497382199,
+        "roc_auc": 0.8083932668264894,
+        "n": 394,
+        "positives": 201,
+        "TP": 142,
+        "FP": 39,
+        "FN": 59,
+        "TN": 154,
+        "auc_consistent_with_counts": true,
+        "accuracy_wilson95": [
+          0.7062964243385654,
+          0.791389263213363
+        ],
+        "majority_class_accuracy": 0.5101522842639594,
+        "predicted_positive": 181
+      },
+      {
+        "dataset": "NASA SENTRY",
+        "model": "Tuned Random Forest",
+        "accuracy": 0.7182741116751269,
+        "precision": 0.7556818181818182,
+        "recall": 0.6616915422885572,
+        "f1": 0.7055702917771883,
+        "roc_auc": 0.7938030056969041,
+        "n": 394,
+        "positives": 201,
+        "TP": 133,
+        "FP": 43,
+        "FN": 68,
+        "TN": 150,
+        "auc_consistent_with_counts": true,
+        "accuracy_wilson95": [
+          0.6719133128329828,
+          0.760419708676773
+        ],
+        "majority_class_accuracy": 0.5101522842639594,
+        "predicted_positive": 176
+      }
+    ],
+    "test_sets": {
+      "NASA CAD": {
+        "n_test": 639,
+        "positives": 328,
+        "negatives": 311,
+        "rows_in_delivered_file": 33,
+        "test_share_of_delivered_file": 19.363636363636363,
+        "note": "smallest consistent size; any other must be an exact multiple with every count scaled"
+      },
+      "NASA SCOUT": {
+        "n_test": 9,
+        "positives": 3,
+        "negatives": 6,
+        "rows_in_delivered_file": 72,
+        "test_share_of_delivered_file": 0.125,
+        "note": "smallest consistent size; any other must be an exact multiple with every count scaled"
+      },
+      "NASA SENTRY": {
+        "n_test": 394,
+        "positives": 201,
+        "negatives": 193,
+        "rows_in_delivered_file": 2242,
+        "test_share_of_delivered_file": 0.17573595004460305,
+        "note": "smallest consistent size; any other must be an exact multiple with every count scaled"
+      }
+    }
+  },
+  "files": {
+    "cad_file": {
+      "rows_in_file": 33,
+      "rows_matched_to_sbdb": 33,
+      "positives": 2,
+      "label": "JPL PHA flag",
+      "protocol": "leave-one-out (pooled out-of-fold predictions)",
+      "features_for_trained_models": [
+        "dist",
+        "dist_min",
+        "dist_max",
+        "v_rel",
+        "v_inf",
+        "h"
+      ],
+      "methods": {
+        "Ours: path rule (training-free)": {
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "mcc": 1.0,
+          "roc_auc": 1.0,
+          "pr_auc": 1.0
+        },
+        "CNN": {
+          "accuracy": 0.9393939393939394,
+          "balanced_accuracy": 0.5,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "mcc": 0.0,
+          "roc_auc": 0.8225806451612903,
+          "pr_auc": 0.20833333333333331,
+          "errors": [
+            "524522",
+            "2001 KF54"
+          ]
+        },
+        "GPBoost": {
+          "accuracy": 0.9090909090909091,
+          "balanced_accuracy": 0.4838709677419355,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "mcc": -0.04490132550669373,
+          "roc_auc": 0.9032258064516129,
+          "pr_auc": 0.3333333333333333,
+          "errors": [
+            "524522",
+            "2017 WJ2",
+            "2001 KF54"
+          ]
+        },
+        "Tuned RF": {
+          "accuracy": 0.9393939393939394,
+          "balanced_accuracy": 0.5,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "mcc": 0.0,
+          "roc_auc": 0.967741935483871,
+          "pr_auc": 0.75,
+          "errors": [
+            "524522",
+            "2001 KF54"
+          ]
+        }
+      },
+      "tuned_rf_folds_tuned": 0,
+      "rule_errors": []
+    },
+    "sentry_file": {
+      "rows_in_file": 2242,
+      "rows_matched_to_sbdb": 2241,
+      "positives": 15,
+      "positives_with_H_le_22": 15,
+      "objects_with_H_le_22": 21,
+      "objects_with_moid_path_le_0.05": 2224,
+      "label": "JPL PHA flag",
+      "protocol": "5x5 repeated stratified CV, out-of-fold predictions pooled per repeat",
+      "features_for_trained_models": [
+        "h",
+        "diameter",
+        "log10_ip",
+        "n_imp",
+        "ps_max",
+        "ps_cum",
+        "ts_max",
+        "v_inf",
+        "last_obs_jd",
+        "range_first",
+        "range_last"
+      ],
+      "methods": {
+        "CNN": {
+          "accuracy_mean": 0.9956269522534583,
+          "accuracy_std": 0.0011111021506460253,
+          "balanced_accuracy_mean": 0.8123899371069182,
+          "balanced_accuracy_std": 0.05071600658363786,
+          "precision_mean": 0.691025641025641,
+          "precision_std": 0.09206699387373712,
+          "recall_mean": 0.6266666666666667,
+          "recall_std": 0.10110500592068732,
+          "f1_mean": 0.656084656084656,
+          "f1_std": 0.09328989138850452,
+          "mcc_mean": 0.6552844097488347,
+          "mcc_std": 0.09321552801141139,
+          "roc_auc_mean": 0.9940131775980833,
+          "roc_auc_std": 0.006103264528030218,
+          "pr_auc_mean": 0.7577734390859274,
+          "pr_auc_std": 0.06164142496361821
+        },
+        "GPBoost": {
+          "accuracy_mean": 0.9969656403391344,
+          "accuracy_std": 0.0005818119058636988,
+          "balanced_accuracy_mean": 0.8527942497753818,
+          "balanced_accuracy_std": 0.03801589545969084,
+          "precision_mean": 0.8152847152847154,
+          "precision_std": 0.03777822368027562,
+          "recall_mean": 0.7066666666666667,
+          "recall_std": 0.07601169500660922,
+          "f1_mean": 0.7557029177718833,
+          "f1_std": 0.05433861934708173,
+          "mcc_mean": 0.7568392897817183,
+          "mcc_std": 0.05231237622549223,
+          "roc_auc_mean": 0.9963821503444145,
+          "roc_auc_std": 0.0018807692524835534,
+          "pr_auc_mean": 0.8693258103800771,
+          "pr_auc_std": 0.019426703319830207
+        },
+        "Tuned RF": {
+          "accuracy_mean": 0.9966979027219992,
+          "accuracy_std": 0.00024440988732936955,
+          "balanced_accuracy_mean": 0.9453638814016173,
+          "balanced_accuracy_std": 0.018114291609268918,
+          "precision_mean": 0.69906432748538,
+          "precision_std": 0.024205864454972813,
+          "recall_mean": 0.8933333333333333,
+          "recall_std": 0.036514837167011045,
+          "f1_mean": 0.7836482471776589,
+          "f1_std": 0.013195173035417205,
+          "mcc_mean": 0.7883399621640276,
+          "mcc_std": 0.013668868935175034,
+          "roc_auc_mean": 0.9982150344414495,
+          "roc_auc_std": 0.0006951801685512814,
+          "pr_auc_mean": 0.7346367957234831,
+          "pr_auc_std": 0.053191147988296626
+        },
+        "Ours: path rule (training-free)": {
+          "accuracy_mean": 1.0,
+          "accuracy_std": 0.0,
+          "balanced_accuracy_mean": 1.0,
+          "balanced_accuracy_std": 0.0,
+          "precision_mean": 1.0,
+          "precision_std": 0.0,
+          "recall_mean": 1.0,
+          "recall_std": 0.0,
+          "f1_mean": 1.0,
+          "f1_std": 0.0,
+          "mcc_mean": 1.0,
+          "mcc_std": 0.0,
+          "roc_auc_mean": 1.0,
+          "roc_auc_std": 0.0,
+          "pr_auc_mean": 1.0,
+          "pr_auc_std": 0.0
+        }
+      },
+      "rule_errors": []
+    },
+    "scout_file": {
+      "rows_in_file": 72,
+      "ground_truth": null,
+      "why": "Scout lists unconfirmed NEOCP candidates; they have no designation, JPL orbit or PHA flag yet",
+      "names_found_in_sbdb": 0,
+      "rule_on_scout_nominal_moid_and_H": {
+        "flagged": 1,
+        "flagged_objects": [
+          {
+            "objectName": "A11JlNV",
+            "H": 20.9,
+            "moid": 0.02,
+            "phaScore": 33
+          }
+        ]
+      },
+      "scout_phaScore_gt_0": 17,
+      "scout_phaScore_ge_50": 0
+    }
+  },
+  "cad_full": {
+    "rows": 306590,
+    "asteroids": 36817,
+    "positive_rows": 26784,
+    "label": "JPL PHA flag",
+    "features_for_trained_models": [
+      "dist",
+      "dist_min",
+      "dist_max",
+      "v_rel",
+      "v_inf",
+      "h"
+    ],
+    "folds": "same StratifiedKFold / StratifiedGroupKFold (seed 20261111) as earth_view.py",
+    "rule_matches_same_folds_rows_csv": true,
+    "model_notes": {
+      "row_split/CNN": [
+        {
+          "epochs": 15,
+          "val_loss": 0.14754344522953033,
+          "fit_seconds": 226.3792018890381
+        },
+        {
+          "epochs": 19,
+          "val_loss": 0.14762920141220093,
+          "fit_seconds": 285.98426699638367
+        },
+        {
+          "epochs": 25,
+          "val_loss": 0.1476590633392334,
+          "fit_seconds": 291.8463861942291
+        },
+        {
+          "epochs": 19,
+          "val_loss": 0.1480761468410492,
+          "fit_seconds": 144.76532411575317
+        },
+        {
+          "epochs": 21,
+          "val_loss": 0.14473368227481842,
+          "fit_seconds": 158.59040689468384
+        }
+      ],
+      "row_split/GPBoost": [
+        {
+          "random_effect": "asteroid",
+          "re_variance": 6.518455104216454
+        },
+        {
+          "random_effect": "asteroid",
+          "re_variance": 6.528595758192412
+        },
+        {
+          "random_effect": "asteroid",
+          "re_variance": 6.519020421860953
+        },
+        {
+          "random_effect": "asteroid",
+          "re_variance": 6.520639980244109
+        },
+        {
+          "random_effect": "asteroid",
+          "re_variance": 6.507768153152217
+        }
+      ],
+      "row_split/Tuned RF": [
+        {
+          "tuned": true,
+          "inner_f1": 0.5516857556136006,
+          "n_estimators": 200,
+          "min_samples_leaf": 8,
+          "max_features": 0.5,
+          "max_depth": null,
+          "class_weight": "balanced_subsample"
+        },
+        {
+          "tuned": true,
+          "inner_f1": 0.5527194951473767,
+          "n_estimators": 200,
+          "min_samples_leaf": 8,
+          "max_features": 0.5,
+          "max_depth": null,
+          "class_weight": "balanced_subsample"
+        },
+        {
+          "tuned": true,
+          "inner_f1": 0.5406416591654056,
+          "n_estimators": 200,
+          "min_samples_leaf": 8,
+          "max_features": 0.5,
+          "max_depth": null,
+          "class_weight": "balanced_subsample"
+        },
+        {
+          "tuned": true,
+          "inner_f1": 0.5478320195591065,
+          "n_estimators": 200,
+          "min_samples_leaf": 8,
+          "max_features": 0.5,
+          "max_depth": null,
+          "class_weight": "balanced_subsample"
+        },
+        {
+          "tuned": true,
+          "inner_f1": 0.5543986485378626,
+          "n_estimators": 200,
+          "min_samples_leaf": 8,
+          "max_features": 0.5,
+          "max_depth": null,
+          "class_weight": "balanced_subsample"
+        }
+      ],
+      "asteroid_grouped/CNN": [
+        {
+          "epochs": 16,
+          "val_loss": 0.15669284760951996,
+          "fit_seconds": 116.517911195755
+        },
+        {
+          "epochs": 13,
+          "val_loss": 0.1498948037624359,
+          "fit_seconds": 163.6887710094452
+        },
+        {
+          "epochs": 21,
+          "val_loss": 0.1414623111486435,
+          "fit_seconds": 151.21990394592285
+        },
+        {
+          "epochs": 16,
+          "val_loss": 0.1542595475912094,
+          "fit_seconds": 114.19866299629211
+        },
+        {
+          "epochs": 15,
+          "val_loss": 0.15692536532878876,
+          "fit_seconds": 109.81781888008118
+        }
+      ],
+      "asteroid_grouped/GPBoost": [
+        {
+          "random_effect": "asteroid",
+          "re_variance": 6.771388140846186
+        },
+        {
+          "random_effect": "asteroid",
+          "re_variance": 6.784605329866977
+        },
+        {
+          "random_effect": "asteroid",
+          "re_variance": 6.773646363843376
+        },
+        {
+          "random_effect": "asteroid",
+          "re_variance": 6.764097334060662
+        },
+        {
+          "random_effect": "asteroid",
+          "re_variance": 6.765894992702678
+        }
+      ],
+      "asteroid_grouped/Tuned RF": [
+        {
+          "tuned": true,
+          "inner_f1": 0.5377618579752127,
+          "n_estimators": 200,
+          "min_samples_leaf": 8,
+          "max_features": 0.5,
+          "max_depth": null,
+          "class_weight": "balanced_subsample"
+        },
+        {
+          "tuned": true,
+          "inner_f1": 0.5219149015599583,
+          "n_estimators": 200,
+          "min_samples_leaf": 2,
+          "max_features": "sqrt",
+          "max_depth": 8,
+          "class_weight": "balanced"
+        },
+        {
+          "tuned": true,
+          "inner_f1": 0.5398543234675596,
+          "n_estimators": 200,
+          "min_samples_leaf": 8,
+          "max_features": 0.5,
+          "max_depth": null,
+          "class_weight": "balanced_subsample"
+        },
+        {
+          "tuned": true,
+          "inner_f1": 0.5025625572217239,
+          "n_estimators": 200,
+          "min_samples_leaf": 8,
+          "max_features": 0.5,
+          "max_depth": null,
+          "class_weight": "balanced_subsample"
+        },
+        {
+          "tuned": true,
+          "inner_f1": 0.5517801051797941,
+          "n_estimators": 200,
+          "min_samples_leaf": 8,
+          "max_features": 0.5,
+          "max_depth": null,
+          "class_weight": "balanced_subsample"
+        }
+      ]
+    },
+    "protocols": {
+      "row_split": {
+        "Ours: path rule (training-free)": {
+          "accuracy_mean": 0.9978864281287713,
+          "accuracy_std": 0.00018327941677266144,
+          "balanced_accuracy_mean": 0.9909418054457841,
+          "balanced_accuracy_std": 0.0011133024906470879,
+          "precision_mean": 0.993207326146738,
+          "precision_std": 0.0006824239982357516,
+          "recall_mean": 0.9825269136875765,
+          "recall_std": 0.0022498528728724324,
+          "f1_mean": 0.987836905360507,
+          "f1_std": 0.0010682189182035953,
+          "mcc_mean": 0.9866976995563256,
+          "mcc_std": 0.0011608897982978712,
+          "roc_auc_mean": 0.9997764808722325,
+          "roc_auc_std": 2.684869994177136e-05,
+          "pr_auc_mean": 0.9980432418693388,
+          "pr_auc_std": 0.0002299261215166762,
+          "fit_seconds_mean": NaN,
+          "fit_seconds_std": NaN
+        },
+        "CNN": {
+          "accuracy_mean": 0.9266838448742621,
+          "accuracy_std": 0.0007105496711268805,
+          "balanced_accuracy_mean": 0.6238688053274413,
+          "balanced_accuracy_std": 0.00526085837542988,
+          "precision_mean": 0.7286495501785257,
+          "precision_std": 0.02253752072142211,
+          "recall_mean": 0.2569439969731032,
+          "recall_std": 0.011507855451281926,
+          "f1_mean": 0.379649052001595,
+          "f1_std": 0.011052369018076541,
+          "mcc_mean": 0.40469496575335706,
+          "mcc_std": 0.00762783414539634,
+          "roc_auc_mean": 0.9430618638083109,
+          "roc_auc_std": 0.0007943691882992886,
+          "pr_auc_mean": 0.5961320620200675,
+          "pr_auc_std": 0.004960545115166396,
+          "fit_seconds_mean": 226.24725060462953,
+          "fit_seconds_std": 69.36575511291969
+        },
+        "GPBoost": {
+          "accuracy_mean": 0.9989725692292637,
+          "accuracy_std": 0.0001299567618848602,
+          "balanced_accuracy_mean": 0.9941196166525605,
+          "balanced_accuracy_std": 0.000743835356769772,
+          "precision_mean": 1.0,
+          "precision_std": 0.0,
+          "recall_mean": 0.9882392333051211,
+          "recall_std": 0.0014876707135396095,
+          "f1_mean": 0.9940843830823687,
+          "f1_std": 0.0007519725229715051,
+          "mcc_mean": 0.9935429502769326,
+          "mcc_std": 0.0008182163457175838,
+          "roc_auc_mean": 0.9999859874628279,
+          "roc_auc_std": 6.145079303954024e-06,
+          "pr_auc_mean": 0.9998666922875135,
+          "pr_auc_std": 5.141677100334337e-05,
+          "fit_seconds_mean": 14.672966384887696,
+          "fit_seconds_std": 4.104037553740469
+        },
+        "Tuned RF": {
+          "accuracy_mean": 0.8941909390391076,
+          "accuracy_std": 0.001969541950868477,
+          "balanced_accuracy_mean": 0.8923846487488533,
+          "balanced_accuracy_std": 0.0024115346308158977,
+          "precision_mean": 0.44703907217790056,
+          "precision_std": 0.004986353101532652,
+          "recall_mean": 0.8901959118212781,
+          "recall_std": 0.006030658724962138,
+          "f1_mean": 0.5951619882729066,
+          "f1_std": 0.004002925838330658,
+          "mcc_mean": 0.5845509071370271,
+          "mcc_std": 0.0037937735254840723,
+          "roc_auc_mean": 0.9575734487289154,
+          "roc_auc_std": 0.0009370262230353922,
+          "pr_auc_mean": 0.6633366392416076,
+          "pr_auc_std": 0.006068493479945044,
+          "fit_seconds_mean": 58.73893880844116,
+          "fit_seconds_std": 5.747236640958295
+        }
+      },
+      "asteroid_grouped": {
+        "Ours: path rule (training-free)": {
+          "accuracy_mean": 0.9978864281287713,
+          "accuracy_std": 0.0007930658098662013,
+          "balanced_accuracy_mean": 0.9909420012601469,
+          "balanced_accuracy_std": 0.004112149242739309,
+          "precision_mean": 0.9932192930654203,
+          "precision_std": 0.004002705626904298,
+          "recall_mean": 0.9825273040390362,
+          "recall_std": 0.008222273188105107,
+          "f1_mean": 0.9878273580110266,
+          "f1_std": 0.004598405220358967,
+          "mcc_mean": 0.9866976685903838,
+          "mcc_std": 0.005017633688771117,
+          "roc_auc_mean": 0.9997852020359964,
+          "roc_auc_std": 0.00016718749745861503,
+          "pr_auc_mean": 0.9981254378530255,
+          "pr_auc_std": 0.0013336148125756443,
+          "fit_seconds_mean": NaN,
+          "fit_seconds_std": NaN
+        },
+        "CNN": {
+          "accuracy_mean": 0.9261000032616848,
+          "accuracy_std": 0.0007621986264338678,
+          "balanced_accuracy_mean": 0.6249503870246205,
+          "balanced_accuracy_std": 0.00636128039712791,
+          "precision_mean": 0.7106160804149727,
+          "precision_std": 0.008874457611078511,
+          "recall_mean": 0.2600435130348808,
+          "recall_std": 0.013273212169816102,
+          "f1_mean": 0.3805823585096673,
+          "f1_std": 0.014147888032225994,
+          "mcc_mean": 0.40101098933427315,
+          "mcc_std": 0.010757837161693533,
+          "roc_auc_mean": 0.9415923837819232,
+          "roc_auc_std": 0.0025843527956937685,
+          "pr_auc_mean": 0.5886580536608316,
+          "pr_auc_std": 0.009989574712679,
+          "fit_seconds_mean": 135.31309719085692,
+          "fit_seconds_std": 24.47125487463534
+        },
+        "GPBoost": {
+          "accuracy_mean": 0.912639029322548,
+          "accuracy_std": 7.293349350895207e-06,
+          "balanced_accuracy_mean": 0.5,
+          "balanced_accuracy_std": 0.0,
+          "precision_mean": 0.0,
+          "precision_std": 0.0,
+          "recall_mean": 0.0,
+          "recall_std": 0.0,
+          "f1_mean": 0.0,
+          "f1_std": 0.0,
+          "mcc_mean": 0.0,
+          "mcc_std": 0.0,
+          "roc_auc_mean": 0.9193285189011702,
+          "roc_auc_std": 0.006602070508779473,
+          "pr_auc_mean": 0.5744083392926131,
+          "pr_auc_std": 0.011812776325365698,
+          "fit_seconds_mean": 11.122336959838867,
+          "fit_seconds_std": 1.6293985959898578
+        },
+        "Tuned RF": {
+          "accuracy_mean": 0.8700349000293551,
+          "accuracy_std": 0.014233529507210824,
+          "balanced_accuracy_mean": 0.8509078520868794,
+          "balanced_accuracy_std": 0.032602154805941225,
+          "precision_mean": 0.3883189070669047,
+          "precision_std": 0.020005464570770126,
+          "recall_mean": 0.8277315157082306,
+          "recall_std": 0.08698053693308344,
+          "f1_mean": 0.5267841464737699,
+          "f1_std": 0.013124779287482971,
+          "mcc_mean": 0.5090224683433481,
+          "mcc_std": 0.022711584055970947,
+          "roc_auc_mean": 0.9374248998282726,
+          "roc_auc_std": 0.0048973218130199895,
+          "pr_auc_mean": 0.5716839215532895,
+          "pr_auc_std": 0.018253302983029338,
+          "fit_seconds_mean": 35.92115230560303,
+          "fit_seconds_std": 3.347793678004301
+        }
+      }
+    }
+  }
+}

@@ -17,14 +17,12 @@ import time
 
 import numpy as np
 import pandas as pd
-from lightgbm import LGBMClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import StratifiedGroupKFold, StratifiedKFold
 from sklearn.neural_network import MLPClassifier
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
-from xgboost import XGBClassifier
 
 from common import H_LIMIT, MOID_LIMIT_AU, N_FOLDS, RESULTS, SEED, binary_metrics, load_sbdb, save_json, summarize_folds
 from earth_view import build_dataset as build_earth_view
@@ -82,6 +80,9 @@ def rule_scores(df: pd.DataFrame, col: str) -> tuple[np.ndarray, np.ndarray]:
 
 
 def make_models() -> dict:
+    # imported here, not at module level: sheet_comparison.py imports this module next to GPBoost (a LightGBM fork)
+    from lightgbm import LGBMClassifier
+    from xgboost import XGBClassifier
     return {
         "LogReg": make_pipeline(StandardScaler(), LogisticRegression(max_iter=5000)),
         "RandomForest": RandomForestClassifier(n_estimators=300, n_jobs=-1, random_state=SEED),

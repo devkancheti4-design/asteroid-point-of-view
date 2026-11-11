@@ -23,3 +23,6 @@ proofs/pha_law_check
 # build products and logs
 presentation/build/
 *.log
+
+# reproduction runs (proofs/compare_runs.py compares them with results/)
+.repro/
