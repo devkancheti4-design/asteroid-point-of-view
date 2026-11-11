@@ -39,6 +39,25 @@ a factor of 10 and every other number exactly; rerun on each clone's own results
 committed `src/uncertainty.py` writes: the file came from an earlier version of that script. Every value the two
 versions share was equal. The reproduced file replaced it.
 
+## Commit 5522230 (score-sheet comparison, Kaggle notebook, proof checks 8-10), 2026-11-11
+
+A fresh `gh repo clone` of the pushed commit, run end to end with `./run_all.sh --snapshot`: every step ran
+(1 h 09 min on the same laptop, partly alongside other jobs), and all 10 sections of `proofs/verify_all.sh` passed
+inside the clone, including the audit of the paper's numbers, the independent check of the score-sheet comparison
+and the Kaggle notebook check.
+
+| Comparison | Files identical (tolerance 1e-9) |
+|---|---|
+| original run vs the clone | 33 of 35 shared files |
+
+The two files that differ are the score-sheet comparison's results (`results/sheet_comparison.json` and
+`results/sheet_comparison_folds.csv`), and only in GPBoost's probability-based numbers. GPBoost estimates the
+variance of its random effect per asteroid with multithreaded floating-point sums, whose order varies between runs;
+the estimate differs by at most 6e-9, which moves GPBoost's ROC AUC by at most 8e-7 and its PR AUC by at most 9e-6
+per fold. Its hard predictions, and so its accuracy, precision, recall, F1 and MCC, are identical, as is every
+number of the CNN, the tuned random forest and the path rule. No digit reported in the paper or the README changes.
+(`paper/tables/tab_sheet.tex`, the third file not shared, was added after this commit.)
+
 ## How to repeat
 
 ```bash
