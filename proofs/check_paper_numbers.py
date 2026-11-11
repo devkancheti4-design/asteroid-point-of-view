@@ -74,14 +74,59 @@ sb = pd.read_csv(ROOT / "data" / "processed" / "sbdb_neo.csv", usecols=["pdes", 
 unres = pr[pr.act.str.startswith("OBSERVE")].merge(sb, on="pdes")
 n_unres_cc = int(unres.condition_code.between(8, 9).sum())
 
+# three further model families (src/sheet_comparison.py): best honest scores over all nine Earth's-view models
+sc = j("sheet_comparison.json")
+THREE, OURS = ("CNN", "GPBoost", "Tuned RF"), "Ours: path rule (training-free)"
+scr, scg = sc["cad_full"]["protocols"]["row_split"], sc["cad_full"]["protocols"]["asteroid_grouped"]
+best9_acc = max(grp.accuracy_mean.max(), max(scg[m]["accuracy_mean"] for m in THREE))
+best9_f1 = max(grp.f1_mean.max(), max(scg[m]["f1_mean"] for m in THREE))
+sc_cad, sc_se, sc_sheet = sc["files"]["cad_file"], sc["files"]["sentry_file"], sc["sheet"]
+sheet_acc = [r["accuracy"] for r in sc_sheet["rows"] if r["dataset"] in ("NASA CAD", "NASA SENTRY")]
+WORDS = {2: "two"}
+
 CLAIMS = [
     ("leak share", r"places 95.7\% of test rows", pct(st["test_rows_with_asteroid_in_train"]["row_split"], 1)),
-    ("best grouped accuracy", r"at most 92.6\% accuracy", pct(grp.accuracy_mean.max(), 1)),
-    ("best grouped F1", r"PHA-class F1 of 0.43", f"{grp.f1_mean.max():.2f}"),
+    ("best grouped accuracy", r"at most 92.6\% accuracy", pct(best9_acc, 1)),
+    ("best grouped F1", r"PHA-class F1 of 0.53", f"{best9_f1:.2f}"),
     ("majority baseline", r"(91.3\%)", pct(1 - st["positive_rate_rows"], 1)),
     ("rule accuracy", r"reaches 99.86\% accuracy and F1 0.989 on all 42,888", pct(rule.accuracy_mean)),
     ("rule F1", r"reaches 99.86\% accuracy and F1 0.989 on all 42,888", f"{rule.f1_mean:.3f}"),
-    ("same-fold F1", r"raises F1 from 0.43 to 0.99 on identical grouped folds", f"{sf_row(RULE).f1_mean:.2f}"),
+    ("same-fold F1", r"raises F1 from at most 0.53 to 0.99 on identical grouped folds", f"{sf_row(RULE).f1_mean:.2f}"),
+    ("same-fold best F1", r"raises F1 from at most 0.53 to 0.99 on identical grouped folds", f"{best9_f1:.2f}"),
+    ("six-model F1 row", r"six prior-work models falls from 0.68 to 0.43", f"{ev[ev.protocol == 'row_split'].f1_mean.max():.2f}"),
+    ("six-model F1 grouped", r"six prior-work models falls from 0.68 to 0.43", f"{grp.f1_mean.max():.2f}"),
+    ("no model exceeds", r"and a tuned random forest, exceeds 0.53", f"{best9_f1:.2f}"),
+    ("contribution F1", r"F1 0.99 instead of at most 0.53 on identical folds", f"{best9_f1:.2f}"),
+    ("conclusion F1", r"(F1 at most 0.53)", f"{best9_f1:.2f}"),
+    ("GPBoost row acc", r"reaches 99.90\% accuracy (F1 0.994)", pct(scr["GPBoost"]["accuracy_mean"])),
+    ("GPBoost row F1", r"reaches 99.90\% accuracy (F1 0.994)", f"{scr['GPBoost']['f1_mean']:.3f}"),
+    ("GPBoost grouped F1", r"(F1 0.000, ROC-AUC 0.919)", f"{scg['GPBoost']['f1_mean']:.3f}"),
+    ("GPBoost grouped AUC", r"(F1 0.000, ROC-AUC 0.919)", f"{scg['GPBoost']['roc_auc_mean']:.3f}"),
+    ("CNN grouped", r"reach 92.61\%, 91.26\% and 87.00\% accuracy", pct(scg["CNN"]["accuracy_mean"])),
+    ("GPBoost grouped", r"reach 92.61\%, 91.26\% and 87.00\% accuracy", pct(scg["GPBoost"]["accuracy_mean"])),
+    ("tuned RF grouped", r"reach 92.61\%, 91.26\% and 87.00\% accuracy", pct(scg["Tuned RF"]["accuracy_mean"])),
+    ("three grouped best F1", r"and at most F1 0.527, against", f"{max(scg[m]['f1_mean'] for m in THREE):.3f}"),
+    ("rule full CAD acc", r"against 99.79\% and F1 0.988 for the training-free rule", pct(scg[OURS]["accuracy_mean"])),
+    ("rule full CAD F1", r"against 99.79\% and F1 0.988 for the training-free rule", f"{scg[OURS]['f1_mean']:.3f}"),
+    ("CAD file rows", r"On 33 Earth approaches within", f"{sc_cad['rows_matched_to_sbdb']}"),
+    ("CAD file PHAs", r"two of them by PHAs", WORDS.get(sc_cad["positives"], str(sc_cad["positives"]))),
+    ("CAD file rule exact", r"the rule labels every object correctly",
+     "every object" if sc_cad["methods"][OURS]["accuracy"] == 1.0 else "not every object"),
+    ("CAD file models", r"find neither PHA",
+     "neither" if all(sc_cad["methods"][m]["recall"] == 0 for m in THREE) else "some"),
+    ("Sentry scored", r"where 2,241 of the 2,242 objects", f"{sc_se['rows_matched_to_sbdb']:,}"),
+    ("Sentry rows", r"where 2,241 of the 2,242 objects", f"{sc_se['rows_in_file']:,}"),
+    ("Sentry PHAs", r"(15 PHAs), the rule is again exact", f"{sc_se['positives']}"),
+    ("Sentry rule exact", r"(15 PHAs), the rule is again exact",
+     "exact" if sc_se["methods"][OURS]["accuracy_mean"] == 1.0 else "inexact"),
+    ("Sentry best model", r"the best model reaches F1 0.784", f"{max(sc_se['methods'][m]['f1_mean'] for m in THREE):.3f}"),
+    ("sheet accuracy low", r"reported 72--75\% accuracy", f"{round(100 * min(sheet_acc))}"),
+    ("sheet accuracy high", r"reported 72--75\% accuracy", f"{round(100 * max(sheet_acc))}"),
+    ("sheet CAD test", r"its test sets have 639 and 394 rows", f"{sc_sheet['test_sets']['NASA CAD']['n_test']}"),
+    ("sheet Sentry test", r"its test sets have 639 and 394 rows", f"{sc_sheet['test_sets']['NASA SENTRY']['n_test']}"),
+    ("CAD table size", r"whereas the CAD table has 33 rows and the Sentry list 15 PHAs", f"{sc_cad['rows_in_file']}"),
+    ("Sentry list PHAs", r"whereas the CAD table has 33 rows and the Sentry list 15 PHAs", f"{sc_se['positives']}"),
+    ("Scout candidates", r"Scout's 72 unconfirmed candidates", f"{sc['files']['scout_file']['rows_in_file']}"),
     ("decided share", r"decides 99.43\% of them", pct(decs["coverage"])),
     ("flagged share", r"flags the remaining 0.57\%", pct(1 - decs["coverage"])),
     ("Brier reduction low", r"30--36\%", f"{round(red.min())}"),

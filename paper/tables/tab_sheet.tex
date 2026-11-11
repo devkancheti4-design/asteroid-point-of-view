@@ -1,0 +1,28 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\caption{Three further model families against the training-free path rule, with JPL's PHA flag as the label. Top: the 306,590 CAD approaches and folds of Table~\ref{tab:earthview} (mean of 5 folds); the models use the CAD table's own columns, and GPBoost adds a random effect per asteroid. Bottom: two small JPL tables~\cite{jpl_cad_api,jpl_sentry_api}, each with its own columns for the models: 33 Earth approaches of September to November 2026 (2 PHAs; leave-one-out) and the 2,241 Sentry objects with an absolute magnitude (15 PHAs; 5-fold $\times$5). Bold: best honest result per column.}
+\label{tab:sheet}
+\setlength{\tabcolsep}{2.2pt}
+\begin{tabular}{@{}llcccc@{}}
+\toprule
+Method & Split & Acc.\,\% & F1 & MCC & AUC \\
+\midrule
+CNN & row & 92.67 & 0.380 & 0.405 & 0.943 \\
+GPBoost & row & 99.90 & 0.994 & 0.994 & 1.000 \\
+Tuned RF & row & 89.42 & 0.595 & 0.585 & 0.958 \\
+CNN & grouped & 92.61 & 0.381 & 0.401 & 0.942 \\
+GPBoost & grouped & 91.26 & 0.000 & 0.000 & 0.919 \\
+Tuned RF & grouped & 87.00 & 0.527 & 0.509 & 0.937 \\
+Path rule (ours) & both & \textbf{99.79} & \textbf{0.988} & \textbf{0.987} & \textbf{1.000} \\
+\midrule
+ & & \multicolumn{2}{c}{CAD (33)} & \multicolumn{2}{c}{Sentry (2,241)} \\
+\cmidrule(lr){3-4}\cmidrule(l){5-6}
+ & & Acc.\,\% & F1 & Acc.\,\% & F1 \\
+CNN & & 93.94 & 0.000 & 99.56 & 0.656 \\
+GPBoost & & 90.91 & 0.000 & 99.70 & 0.756 \\
+Tuned RF & & 93.94 & 0.000 & 99.67 & 0.784 \\
+Path rule (ours) & & \textbf{100.00} & \textbf{1.000} & \textbf{100.00} & \textbf{1.000} \\
+\bottomrule
+\end{tabular}
+\end{table}

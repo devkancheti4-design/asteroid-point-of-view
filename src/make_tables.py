@@ -349,6 +349,67 @@ Method & Acc.\,\% & F1 & F2 & MCC \\
     write("tab_kaggle", body)
 
 
+def table_sheet() -> None:
+    """Three further model families (CNN, GPBoost, tuned random forest) against the rule (sheet_comparison.py)."""
+    path = RESULTS / "sheet_comparison.json"
+    if not path.exists():
+        print("skip score-sheet table (no results yet)")
+        return
+    r = json.loads(path.read_text())
+    if "cad_full" not in r:
+        print("skip score-sheet table (full CAD results missing)")
+        return
+    ours, names = "Ours: path rule (training-free)", {"CNN": "CNN", "GPBoost": "GPBoost", "Tuned RF": "Tuned RF"}
+    cf = r["cad_full"]["protocols"]
+
+    def cells(m, sfx="_mean"):
+        return [pct(m["accuracy" + sfx]), f3(m["f1" + sfx]), f3(m["mcc" + sfx]), f3(m["roc_auc" + sfx])]
+
+    top = []                                            # (label, split, cells, eligible for bold)
+    for proto, split in (("row_split", "row"), ("asteroid_grouped", "grouped")):
+        for k, label in names.items():
+            top.append((label, split, cells(cf[proto][k]), proto == "asteroid_grouped"))
+    rule_row, rule_grp = cells(cf["row_split"][ours]), cells(cf["asteroid_grouped"][ours])
+    if rule_row == rule_grp:
+        top.append(("Path rule (ours)", "both", rule_grp, True))
+    else:
+        top += [("Path rule (ours)", "row", rule_row, False), ("Path rule (ours)", "grouped", rule_grp, True)]
+    t = pd.DataFrame([c for _, _, c, _ in top], columns=["acc", "f1", "mcc", "auc"])
+    t = bold_best(t, list(t.columns), pd.Series([e for *_, e in top]))
+    lines = [f"{lab} & {sp} & " + " & ".join(t.iloc[i]) + r" \\" for i, (lab, sp, _, _) in enumerate(top)]
+
+    files = r["files"]
+    cad, se = files["cad_file"]["methods"], files["sentry_file"]["methods"]
+    bottom = [(names.get(k, "Path rule (ours)"), [pct(cad[k]["accuracy"]), f3(cad[k]["f1"]),
+                                                  pct(se[k]["accuracy_mean"]), f3(se[k]["f1_mean"])])
+              for k in ("CNN", "GPBoost", "Tuned RF", ours)]
+    b = pd.DataFrame([c for _, c in bottom], columns=["a1", "f1", "a2", "f2"])
+    b = bold_best(b, list(b.columns), pd.Series([True] * len(b)))
+    blines = [f"{lab} & & " + " & ".join(b.iloc[i]) + r" \\" for i, (lab, _) in enumerate(bottom)]
+    n_cad, n_se = files["cad_file"]["rows_matched_to_sbdb"], files["sentry_file"]["rows_matched_to_sbdb"]
+    body = rf"""\begin{{table}}[t]
+\centering
+\footnotesize
+\caption{{Three further model families against the training-free path rule, with JPL's PHA flag as the label. Top: the {r['cad_full']['rows']:,} CAD approaches and folds of Table~\ref{{tab:earthview}} (mean of 5 folds); the models use the CAD table's own columns, and GPBoost adds a random effect per asteroid. Bottom: two small JPL tables~\cite{{jpl_cad_api,jpl_sentry_api}}, each with its own columns for the models: {n_cad} Earth approaches of September to November 2026 ({files['cad_file']['positives']} PHAs; leave-one-out) and the {n_se:,} Sentry objects with an absolute magnitude ({files['sentry_file']['positives']} PHAs; 5-fold $\times$5). Bold: best honest result per column.}}
+\label{{tab:sheet}}
+\setlength{{\tabcolsep}}{{2.2pt}}
+\begin{{tabular}}{{@{{}}llcccc@{{}}}}
+\toprule
+Method & Split & Acc.\,\% & F1 & MCC & AUC \\
+\midrule
+{chr(10).join(lines)}
+\midrule
+ & & \multicolumn{{2}}{{c}}{{CAD ({n_cad})}} & \multicolumn{{2}}{{c}}{{Sentry ({n_se:,})}} \\
+\cmidrule(lr){{3-4}}\cmidrule(l){{5-6}}
+ & & Acc.\,\% & F1 & Acc.\,\% & F1 \\
+{chr(10).join(blines)}
+\bottomrule
+\end{{tabular}}
+\end{{table}}
+"""
+    write("tab_sheet", body)
+
+
 def sci(x: float, digits: int = 1) -> str:
     """LaTeX scientific notation, e.g. 1.9\\times10^{-5}."""
     if x == 0:
@@ -417,6 +478,7 @@ Statement & Check & Data & Result \\
 if __name__ == "__main__":
     table_proofs()
     table_kaggle()
+    table_sheet()
     table_decision()
     table_earth_view()
     table_asteroid_view()
