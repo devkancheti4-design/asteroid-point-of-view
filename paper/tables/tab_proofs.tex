@@ -1,0 +1,26 @@
+\begin{table*}[t]
+\centering
+\footnotesize
+\caption{Numerical confirmation of every statement proved in Appendix~\ref{app:proofs}: each check evaluates the implemented quantity against the proved relation (floating-point tolerance $10^{-9}$\,au unless stated). Reproduced by \texttt{proofs/verify\_all.sh}.}
+\label{tab:proofs}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.6cm}YYY@{}}
+\toprule
+Statement & Check & Data & Result \\
+\midrule
+Prop.~\ref{prop:time} & no mean anomaly or epoch in $\delta$ & code & by construction \\
+Prop.~\ref{prop:miss} & two-body motion, 40,000 epochs in 400\,yr & 198 synthetic orbits & closest approach $\ge\delta$; min.\ margin $8.6\times10^{-6}$\,au \\
+Prop.~\ref{prop:miss} & JPL approach vs.\ today's $\delta$ & 306,590 approaches & 98.8\% $\ge \delta - 10^{-4}$\,au (orbits evolve) \\
+Prop.~\ref{prop:leak} & predicted vs.\ observed leakage & CAD 5-fold; Kaggle 10-fold & 95.69 vs.\ 95.69\%; 34.8 vs.\ 34.9\% \\
+Lemma~\ref{lem:radial} & $L_0 \le \delta$ & 42,888 NEAs & 0 violations \\
+Lemma~\ref{lem:node} & $\delta \le \delta_{\mathrm{node}}$ & 42,888 NEAs & 0 violations \\
+Lemma~\ref{lem:bracket}, Cor.~\ref{cor:bracket} & $L_{\mathrm{lon}} \le \delta \le U_{\mathrm{lon}}$; width & 37,214 NEAs, $\delta < 0.2$\,au & 0 violations; width $\le 1.95\times10^{-5}$\,au \\
+Prop.~\ref{prop:phi} & $\Phi \le 1 \Leftrightarrow$ definition & 42,888 NEAs & 0 mismatches \\
+Prop.~\ref{prop:grad} & gradient vs.\ central differences & 60 synthetic orbits & $\le 1.5\times10^{-7}$ \\
+Prop.~\ref{prop:prob} & $P_{\mathrm{lin}}$ vs.\ Monte Carlo (4,000 draws) & 11 synthetic, 32 real orbits & 11/11 and 32/32 inside 95\% interval $\pm0.01$ \\
+Thm.~\ref{thm:law} & law equals its specification & all $2^{32}$ words & 0 mismatches \\
+Thm.~\ref{thm:law} & soundness; termination & 42,700 decided NEAs & 0 violations; $\le 6$ steps \\
+$\delta$ solver & two independent solvers & 42,888 NEAs & $\le 6.8\times10^{-10}$\,au \\
+$\delta$ solver & brute-force reference & 310 synthetic orbits & $\le 2.6\times10^{-11}$\,au; 0 uncertified \\
+\bottomrule
+\end{tabularx}
+\end{table*}

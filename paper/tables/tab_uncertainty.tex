@@ -1,0 +1,19 @@
+\begin{table*}[t]
+\centering
+\footnotesize
+\caption{Hazard classification from uncertain orbits (simulation, real error bars $\times1$). Truth: 11,054 well-determined NEAs (2,039 PHAs). Each true orbit is perturbed with the element uncertainties of a randomly drawn NEA of the given orbit-quality class (17,690 and 12,474 profiles); methods see only the perturbed orbit, its 1$\sigma$ uncertainties and $H$. Applied to the perturbed orbit, the PHA rule mislabels 0.11\% and 1.54\% of asteroids, respectively. Path cloud: 48 clones per asteroid. Means over 5 folds.}
+\label{tab:uncertainty}
+\begin{tabular}{@{}lcccccccc@{}}
+\toprule
+ & \multicolumn{4}{c}{Condition code 5--7} & \multicolumn{4}{c}{Condition code 8--9 (short arcs)} \\
+\cmidrule(lr){2-5}\cmidrule(l){6-9}
+Method & Acc.\,\% & MCC & ROC-AUC & Brier & Acc.\,\% & MCC & ROC-AUC & Brier \\
+\midrule
+Single orbit, exact rule & \textbf{99.89} & \textbf{0.996} & 0.9978 & 0.0011 & \textbf{98.46} & \textbf{0.949} & 0.9741 & 0.0154 \\
+Single orbit, closed form & 98.12 & 0.938 & 0.9687 & 0.0188 & 96.93 & 0.898 & 0.9476 & 0.0307 \\
+LightGBM (orbit, $\sigma$s, kernels) & 99.79 & 0.993 & 0.9998 & 0.0018 & 98.31 & 0.944 & 0.9981 & 0.0150 \\
+Path cloud (ours) & 99.81 & 0.994 & \textbf{1.0000} & \textbf{0.0009} & \textbf{98.46} & \textbf{0.949} & \textbf{0.9989} & \textbf{0.0105} \\
+LightGBM + path cloud (ours) & 99.79 & 0.993 & 0.9999 & 0.0019 & 98.37 & 0.946 & 0.9985 & 0.0146 \\
+\bottomrule
+\end{tabular}
+\end{table*}

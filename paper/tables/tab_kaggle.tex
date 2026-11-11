@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\caption{Same-file comparison on the Kaggle NeoWs table behind the highest reported accuracy~\cite{kaggle_nasa,chandra2025}: 4,687 records of 3,692 asteroids, 16.1\% hazardous. Random-forest rows use every numeric column, including the table's MOID; repeated stratified 10-fold $\times$3. Our rule computes the distance from the table's orbital elements and never reads its MOID column. RF: random forest; k: geometry kernels. $^\dagger$The ceiling for any method that follows the definition.}
+\label{tab:kaggle}
+\setlength{\tabcolsep}{2.2pt}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Method & Acc.\,\% & F1 & F2 & MCC \\
+Reported~\cite{chandra2025}, RF by record & 99.7 & -- & 0.987 & -- \\
+\midrule
+RF by record (reproduced) & 99.62 & 0.988 & 0.986 & 0.986 \\
+RF by asteroid & 99.42 & 0.982 & 0.977 & 0.978 \\
+Training-free path rule (ours) & 99.42 & 0.982 & 0.980 & 0.979 \\
+LightGBM, path+k, by asteroid (ours) & 98.98 & 0.968 & 0.964 & 0.962 \\
+\midrule
+Definition on the table's MOID$^\dagger$ & 99.55 & 0.986 & 0.985 & 0.983 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,116 @@
+\appendices
+
+\section{Proofs}
+\label{app:proofs}
+Throughout, the asteroid's orbit is the curve $\mathcal{A} = \{\mathbf{r}(f) : f \in [0, 2\pi)\}$ of Eq.~\eqref{eq:path}, Earth's orbit is the fixed curve $\mathcal{E} = \{\mathbf{E}(\lambda)\}$ in the reference plane $z = 0$, and $\delta = \min_{\mathbf{x}\in\mathcal{A},\,\mathbf{y}\in\mathcal{E}}\lVert\mathbf{x} - \mathbf{y}\rVert$ is Eq.~\eqref{eq:delta}. For a bound orbit ($e < 1$) both curves are compact, so the minimum exists. All statements concern these two fixed Keplerian curves.
+
+\begin{proposition}[Timing cancels]\label{prop:time}
+$\delta$ depends on the asteroid only through $(a, e, i, \Omega, \omega)$. It is unchanged by any change of the mean anomaly or the epoch, and by any shift of Earth along its orbit.
+\end{proposition}
+\begin{IEEEproof}
+By Eq.~\eqref{eq:path}, the set $\mathcal{A}$ is determined by $(a, e, i, \Omega, \omega)$. The mean anomaly and the epoch only select which point of $\mathcal{A}$ the asteroid occupies at a given time, and Earth's mean longitude only selects a point of $\mathcal{E}$. Since $\delta$ is a minimum over all points of both sets, it is a function of the two sets alone.
+\end{IEEEproof}
+
+\begin{proposition}[Encounters bound the path distance]\label{prop:miss}
+If at time $t$ the asteroid and Earth lie on $\mathcal{A}$ and $\mathcal{E}$, their distance is at least $\delta$. Hence every close-approach distance computed with these orbits is at least $\delta$, and $\delta$ is the infimum of the encounter distance over all pairs of phases.
+\end{proposition}
+\begin{IEEEproof}
+The two positions are points of $\mathcal{A}$ and $\mathcal{E}$, so their distance is one of the values minimised in Eq.~\eqref{eq:delta}. Conversely, every pair of points is occupied at some pair of phases, so no larger lower bound holds over all phases.
+\end{IEEEproof}
+Real orbits evolve under planetary perturbations, so a past approach computed with the orbit of its own epoch can come closer than today's $\delta$. In JPL's data this happens for 1.2\% of approaches by more than $10^{-4}\au$; under two-body motion it never happens (Table~\ref{tab:proofs}).
+
+\begin{proposition}[How much a random split leaks]\label{prop:leak}
+Assign each row independently to the test set with probability $\rho$. A test row of an asteroid with $m$ rows has another row of the same asteroid in the training set with probability $1 - \rho^{m-1}$, so the expected share of such test rows is
+\[
+\frac{\sum_a m_a\,(1 - \rho^{m_a - 1})}{\sum_a m_a}.
+\]
+\end{proposition}
+\begin{IEEEproof}
+Given that a row is in the test set, each of the asteroid's other $m - 1$ rows is in training with probability $1 - \rho$, independently, so the probability that none of them is in training is $\rho^{m-1}$. Asteroid $a$ contributes $m_a\rho$ test rows in expectation; summing $m_a\rho(1 - \rho^{m_a-1})$ over asteroids and dividing by $\sum_a m_a\rho$ gives the stated ratio.
+\end{IEEEproof}
+With the close-approach multiplicities of Section~III-B and $\rho = 0.2$ (5-fold), the formula gives 95.69\%, against 95.69\% observed; for the Kaggle table and $\rho = 0.1$ (10-fold) it gives 34.8\%, against 34.9\% observed. The leakage is therefore a property of the data's multiplicities, not of a particular split.
+
+\begin{lemma}[Radial gap]\label{lem:radial}
+$L_0 = \max(0,\ q - Q_\oplus,\ q_\oplus - Q) \le \delta$.
+\end{lemma}
+\begin{IEEEproof}
+For $\mathbf{x}\in\mathcal{A}$ and $\mathbf{y}\in\mathcal{E}$ the reverse triangle inequality gives $\lVert\mathbf{x} - \mathbf{y}\rVert \ge \bigl|\lVert\mathbf{x}\rVert - \lVert\mathbf{y}\rVert\bigr|$, where $\lVert\mathbf{x}\rVert = p/(1 + e\cos f) \in [q, Q]$ and $\lVert\mathbf{y}\rVert \in [q_\oplus, Q_\oplus]$. If $q > Q_\oplus$, every pair is at least $q - Q_\oplus$ apart; if $Q < q_\oplus$, at least $q_\oplus - Q$; otherwise $L_0 = 0$. In each case the bound holds for every pair, hence for the minimum.
+\end{IEEEproof}
+
+\begin{lemma}[Node gap]\label{lem:node}
+$\delta \le \delta_{\mathrm{node}} = \min(|\Delta_+|, |\Delta_-|)$.
+\end{lemma}
+\begin{IEEEproof}
+At $f_+ = -\omega$ the argument of latitude $\omega + f$ vanishes, so $\mathbf{r}(f_+)$ lies in the plane $z = 0$ at longitude $\Omega$ and distance $r_+ = p/(1 + e\cos\omega)$ from the Sun. Earth's point $\mathbf{E}(\Omega)$ lies on the same ray at distance $R(\Omega)$, so the two points are $|r_+ - R(\Omega)| = |\Delta_+|$ apart. Both are points of the two curves, so $\delta \le |\Delta_+|$. At $f_- = \pi - \omega$ the argument of latitude is $\pi$ and $\cos f_- = -\cos\omega$, which gives $\delta \le |\Delta_-|$ in the same way.
+\end{IEEEproof}
+
+\begin{lemma}[Same-longitude bracket]\label{lem:bracket}
+Let a point have cylindrical coordinates $(\rho, \lambda, z)$ with $\rho > 0$, and let $g = \rho - R(\lambda)$, $c = 4\rho\,q_\oplus/\pi^2$, $K_\oplus = p_\oplus e_\oplus/(1 - e_\oplus)^2$ and $\kappa = c/(c + K_\oplus^2)$. Its distance $d$ to $\mathcal{E}$ satisfies
+\[
+z^2 + \kappa g^2 \;\le\; d^2 \;\le\; z^2 + g^2 .
+\]
+\end{lemma}
+\begin{IEEEproof}
+The upper bound is the squared distance to $\mathbf{E}(\lambda)$, the point of $\mathcal{E}$ at the same longitude. For the lower bound take any point $\mathbf{E}(\lambda + \Delta)$, $|\Delta| \le \pi$, at distance $\tilde R = R(\lambda + \Delta)$ from the Sun. Then
+\[
+\lVert(\rho,\lambda,z) - \mathbf{E}(\lambda+\Delta)\rVert^2 = z^2 + (\rho - \tilde R)^2 + 2\rho\tilde R\,(1 - \cos\Delta).
+\]
+First, $|dR/d\mu| = p_\oplus e_\oplus|\sin\psi|/(1 + e_\oplus\cos\psi)^2 \le K_\oplus$ for every longitude $\mu$ (with $\psi = \mu - \varpi_\oplus$), so $|\tilde R - R(\lambda)| \le K_\oplus|\Delta|$ and $|\rho - \tilde R| \ge (|g| - K_\oplus|\Delta|)_+$. Second, $\tilde R \ge q_\oplus$ and, by Jordan's inequality $\sin x \ge 2x/\pi$ on $[0, \pi/2]$, $1 - \cos\Delta = 2\sin^2(\Delta/2) \ge 2\Delta^2/\pi^2$, so $2\rho\tilde R(1 - \cos\Delta) \ge c\Delta^2$. Hence the squared distance is at least $z^2 + \varphi(|\Delta|)$ with $\varphi(\tau) = \bigl((|g| - K_\oplus\tau)_+\bigr)^2 + c\tau^2$. For $\tau \le |g|/K_\oplus$, $\varphi$ is a convex quadratic minimised at $\tau^* = K_\oplus|g|/(c + K_\oplus^2)$, which lies in that range, where $\varphi(\tau^*) = c g^2/(c + K_\oplus^2) = \kappa g^2$; for $\tau > |g|/K_\oplus$, $\varphi(\tau) = c\tau^2 > c g^2/K_\oplus^2 \ge \kappa g^2$. Minimising over $\Delta$ gives $d^2 \ge z^2 + \kappa g^2$.
+\end{IEEEproof}
+
+\begin{corollary}\label{cor:bracket}
+Let $L_{\mathrm{lon}} = \min_f\sqrt{z^2 + \kappa g^2}$ and $U_{\mathrm{lon}} = \min_f\sqrt{z^2 + g^2}$, evaluated along the asteroid's path. Then $L_{\mathrm{lon}} \le \delta \le U_{\mathrm{lon}}$; both equal $\delta$ if $e_\oplus = 0$; and $U_{\mathrm{lon}} - L_{\mathrm{lon}} \le |g^*|\,(1 - \sqrt{\kappa^*})$, where starred quantities are taken where the lower bound is minimal.
+\end{corollary}
+\begin{IEEEproof}
+$\delta = \min_f d(\mathbf{r}(f))$, and the bounds of Lemma~\ref{lem:bracket} hold at every $f$, so they hold for the minima. If $e_\oplus = 0$ then $K_\oplus = 0$ and $\kappa = 1$. For the width, let $f^*$ minimise the lower bound. Then
+\begin{align*}
+U_{\mathrm{lon}} - L_{\mathrm{lon}} &\le \sqrt{z^{*2} + g^{*2}} - \sqrt{z^{*2} + \kappa^* g^{*2}} \\
+&= \frac{(1 - \kappa^*)\,g^{*2}}{\sqrt{z^{*2} + g^{*2}} + \sqrt{z^{*2} + \kappa^* g^{*2}}} \\
+&\le \frac{(1 - \kappa^*)\,|g^*|}{1 + \sqrt{\kappa^*}} = |g^*|\,(1 - \sqrt{\kappa^*}).
+\end{align*}
+\end{IEEEproof}
+Here $K_\oplus = 0.017279$. At $\rho = 1\au$, $c = 0.3985$ and $1 - \sqrt{\kappa} = 3.7\times10^{-4}$. Where $\delta \le 0.05\au$ we have $|g^*| \le L_{\mathrm{lon}}/\sqrt{\kappa^*} \le 0.0501\au$, hence $\rho^* \ge q_\oplus - 0.0501\au = 0.933\au$ and $1 - \sqrt{\kappa^*} \le 4.0\times10^{-4}$, so the bracket is at most $2.1\times10^{-5}\au$ wide; the widest observed on the catalogue is $1.95\times10^{-5}\au$. The bracket is evaluated numerically (a grid plus local refinement), so the check of Section~IV-B is a numerical certificate, not an interval-arithmetic proof.
+
+\begin{lemma}[Tangent-line distance]\label{lem:lin}
+At a node pair, the distance between the tangent line of $\mathcal{A}$ at $\mathbf{r}(f_\pm)$ and the tangent line of $\mathcal{E}$ at $\mathbf{E}(\lambda_\pm)$ is $\delta_{\mathrm{lin},\pm}$ of Eq.~\eqref{eq:lin}.
+\end{lemma}
+\begin{IEEEproof}
+Work in the orthonormal frame $(\hat{\mathbf{u}}_r, \hat{\mathbf{u}}_\theta, \hat{\mathbf{z}})$ at longitude $\lambda_\pm$; the two points differ by $\mathbf{w} = \Delta_\pm\hat{\mathbf{u}}_r$. The line of nodes is radial there and the orbital plane is tilted about it by $i$, so the asteroid's velocity is parallel to $\mathbf{a} = (k_a, \cos i, \pm\sin i)$, where $k_a = v_r/v_\theta = e\sin f/(1 + e\cos f)$. Earth's velocity is parallel to $\mathbf{b} = (k_\oplus, 1, 0)$. The distance between two lines whose base points differ by $\mathbf{w}$ is $|\mathbf{w}\cdot(\mathbf{a}\times\mathbf{b})|/\lVert\mathbf{a}\times\mathbf{b}\rVert$. Here $\mathbf{a}\times\mathbf{b} = (\mp\sin i,\ \pm k_\oplus\sin i,\ k_a - k_\oplus\cos i)$, so $\mathbf{w}\cdot(\mathbf{a}\times\mathbf{b}) = \mp\Delta_\pm\sin i$ and $\lVert\mathbf{a}\times\mathbf{b}\rVert^2 = \sin^2 i\,(1 + k_\oplus^2) + (k_a - k_\oplus\cos i)^2$, which is Eq.~\eqref{eq:lin}.
+\end{IEEEproof}
+Because both curves bend, $\delta_{\mathrm{lin}}$ is an approximation, accurate to first order in the separation over the radius of curvature, and not a bound; it fails at low inclination (Fig.~\ref{fig:geometry}b).
+
+\begin{proposition}[Hazard index]\label{prop:phi}
+$\Phi \le 1$ if and only if $\delta \le \delta_0$ and $H \le H_0$. At equal albedo, $10^{(H - H_0)/5} = D_0/D$.
+\end{proposition}
+\begin{IEEEproof}
+$\max(x, y) \le 1$ exactly when $x \le 1$ and $y \le 1$. Further, $\delta/\delta_0 \le 1 \Leftrightarrow \delta \le \delta_0$, and since $10^{(\cdot)/5}$ is increasing, $10^{(H - H_0)/5} \le 1 \Leftrightarrow H \le H_0$. With $D = 1329\,\mathrm{km}\;p_V^{-1/2}\,10^{-H/5}$, the ratio $D_0/D$ at the same $p_V$ is $10^{(H - H_0)/5}$.
+\end{IEEEproof}
+
+\begin{proposition}[Signed distance and its gradient]\label{prop:grad}
+Let $G(f, \lambda) = \lVert\mathbf{r}(f; \mathbf{x}) - \mathbf{E}(\lambda)\rVert^2$ have a unique minimum at $(f^*, \lambda^*)$ with a positive-definite Hessian, and let the tangents $\boldsymbol\tau = \partial_f\mathbf{r}$ and $\boldsymbol\tau_\oplus = \partial_\lambda\mathbf{E}$ there be non-parallel. Then (a) $\tilde d = \hat{\mathbf{n}}\cdot\boldsymbol\Delta = \pm\delta$, and (b) $\tilde d$ is differentiable in the elements, with $\partial\tilde d/\partial x_k = \hat{\mathbf{n}}\cdot\partial\mathbf{r}/\partial x_k$ at $f^*$.
+\end{proposition}
+\begin{IEEEproof}
+(a) The first-order conditions $\partial_f G = 2\boldsymbol\Delta\cdot\boldsymbol\tau = 0$ and $\partial_\lambda G = -2\boldsymbol\Delta\cdot\boldsymbol\tau_\oplus = 0$ make $\boldsymbol\Delta$ orthogonal to two independent vectors, hence parallel to $\hat{\mathbf{n}}$: $\boldsymbol\Delta = (\hat{\mathbf{n}}\cdot\boldsymbol\Delta)\,\hat{\mathbf{n}}$ and $|\tilde d| = \lVert\boldsymbol\Delta\rVert = \delta$. (b) By the implicit function theorem, $f^*$ and $\lambda^*$ are differentiable in $\mathbf{x}$. Differentiating $\tilde d = \hat{\mathbf{n}}\cdot\boldsymbol\Delta$ gives two terms. The first, $(\partial_k\hat{\mathbf{n}})\cdot\boldsymbol\Delta = \tilde d\,(\partial_k\hat{\mathbf{n}})\cdot\hat{\mathbf{n}}$, vanishes because $\hat{\mathbf{n}}$ has unit length. The second is $\hat{\mathbf{n}}\cdot(\partial_k\mathbf{r} + \boldsymbol\tau\,\partial_k f^* - \boldsymbol\tau_\oplus\,\partial_k\lambda^*) = \hat{\mathbf{n}}\cdot\partial_k\mathbf{r}$, because $\hat{\mathbf{n}}$ is orthogonal to both tangents. At a crossing ($\boldsymbol\Delta = \mathbf{0}$) the Hessian is $2J^{\top}J$ with $J = [\boldsymbol\tau, -\boldsymbol\tau_\oplus]$, positive definite because the tangents are independent, so the argument applies and $\tilde d$ changes sign smoothly~\cite{gronchi2007}.
+\end{IEEEproof}
+
+\begin{proposition}[Hazard probabilities]\label{prop:prob}
+(a) If $\tilde d$ is linear in $\mathbf{x}$ near $\hat{\mathbf{x}}$ and $\mathbf{x} \sim \mathcal{N}(\hat{\mathbf{x}}, \Sigma)$, then $P(\delta \le \delta_0) = P_{\mathrm{lin}}$ of Eq.~\eqref{eq:plin}. (b) If the catalogue orbit is $\hat{\mathbf{x}} = \mathbf{x} + \boldsymbol\epsilon$ with $\boldsymbol\epsilon \sim \mathcal{N}(\mathbf{0}, \Sigma)$ and the prior on the true $\mathbf{x}$ is flat, then $P_{\mathrm{haz}}$ of Eq.~\eqref{eq:cloud} is an unbiased estimate of $P(\Phi(\mathbf{x}, H) \le 1 \mid \hat{\mathbf{x}})$, with standard error at most $1/(2\sqrt{N})$.
+\end{proposition}
+\begin{IEEEproof}
+(a) A linear function of a Gaussian vector is Gaussian, so $\tilde d \sim \mathcal{N}(\tilde d(\hat{\mathbf{x}}), s^2)$ with $s^2 = \nabla\tilde d^{\top}\Sigma\,\nabla\tilde d$; and $\delta = |\tilde d| \le \delta_0$ exactly when $-\delta_0 \le \tilde d \le \delta_0$ (Proposition~\ref{prop:grad}). (b) With a flat prior, $p(\mathbf{x} \mid \hat{\mathbf{x}}) \propto \mathcal{N}(\hat{\mathbf{x}}; \mathbf{x}, \Sigma) = \mathcal{N}(\mathbf{x}; \hat{\mathbf{x}}, \Sigma)$, which is the distribution the clones are drawn from. Each indicator in Eq.~\eqref{eq:cloud} has mean equal to the posterior probability $P$ and variance $P(1 - P) \le 1/4$, so the average of $N$ independent draws is unbiased with variance at most $1/(4N)$.
+\end{IEEEproof}
+
+\begin{theorem}[Decision procedure]\label{thm:law}
+(a) The procedure ends within six evaluations of the law. (b) Every decided class agrees with the definition evaluated on the certified distance: the act PHA implies $H \le 22$ and $\delta \le \delta_0$; ``not a PHA by geometry'' implies $\delta > \delta_0$; ``not a PHA by size'' implies $H > 22$.
+\end{theorem}
+\begin{IEEEproof}
+(a) Invalid input and $H > 22$ end the procedure at the first evaluation, and a failed check or a non-finite probability at the evaluation after it is detected. Every non-terminal act changes one field of the word, and none can recur. The exact computation (requested from an open certificate, or from a cheap one whose probability is not decisive) moves the certificate to an exact state permanently, while both acts that request it require a non-exact certificate. The delta method requires the uncertainty state ``none'' and leaves ``linear'' or ``needs sampling''. Sampling requires ``needs sampling'' and leaves ``sampled''. With an exact certificate and a linear or sampled probability, every rung of the ladder is terminal. The longest sequence therefore starts from a cheap certificate: delta method, sampling, exact computation, delta method, sampling, and a terminal act, which is six evaluations; from an open certificate it is at most four.
+(b) The ladder decides PHA only for a near or exact-near certificate after the size test has passed, so $H \le 22$ and, by Lemma~\ref{lem:node} or by the exact value, $\delta \le \delta_{\mathrm{node}} \le \delta_0$ or $\delta \le \delta_0$. It decides ``not a PHA by geometry'' only for a far or exact-far certificate, so by Lemma~\ref{lem:radial} or by the exact value, $\delta \ge L_0 > \delta_0$ or $\delta > \delta_0$; the margin $3s_{\mathrm{sys}}$ only strengthens both conditions. It decides ``not a PHA by size'' only when $H > 22$.
+\end{IEEEproof}
+The compiled law equals its specification on all $2^{32}$ 32-bit inputs, so the theorem applies to the executed code, not only to the specification.
+
+\section{Verification evidence}
+\label{app:verify}
+Table~\ref{tab:proofs} confirms every statement of Appendix~\ref{app:proofs} numerically on the real catalogue and on synthetic orbits. The script \texttt{proofs/verify\_all.sh} reruns all of these checks, the exhaustive check of the law and an audit of the numbers quoted in this paper against the result files, and writes a single report.
+
+\input{tables/tab_proofs}

@@ -1,0 +1,30 @@
+\begin{table*}[t]
+\centering
+\footnotesize
+\caption{Asteroid's-view results on all 42,888 labelled near-Earth asteroids: stratified 5-fold cross-validation over asteroids (one row per asteroid, so no asteroid is in both training and test data). Means over folds; across all rows, fold standard deviations are at most 0.17 percentage points for accuracy and 0.016 for F1 and MCC. Best non-reference value per column in bold. $^\dagger$Rows marked with a dagger use JPL's own MOID column, i.e.\ the quantity that defines the label.}
+\label{tab:asteroidview}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+Method (features) & Accuracy\,\% & Bal.\ acc.\,\% & Precision & Recall & F1 & MCC \\
+\midrule
+\multicolumn{7}{@{}l}{\emph{Training-free, asteroid's view}} \\
+Path rule, exact geometry (ours) & \textbf{99.86} & 99.23 & 0.992 & 0.985 & \textbf{0.989} & \textbf{0.988} \\
+Path rule, tangent-line closed form (ours) & 99.26 & 96.74 & 0.937 & 0.939 & 0.938 & 0.934 \\
+Path rule, node gap (upper bound) & 97.16 & 76.31 & \textbf{0.993} & 0.526 & 0.688 & 0.712 \\
+\midrule
+\multicolumn{7}{@{}l}{\emph{Learned, asteroid's view}} \\
+LightGBM (path) & 98.38 & 92.07 & 0.875 & 0.849 & 0.862 & 0.853 \\
+XGBoost (path) & 98.38 & 92.29 & 0.871 & 0.854 & 0.862 & 0.854 \\
+Random forest (path + kernels) & 99.58 & 97.48 & 0.978 & 0.951 & 0.964 & 0.962 \\
+XGBoost (path + kernels) & 99.69 & 98.35 & 0.979 & 0.968 & 0.974 & 0.972 \\
+LightGBM (path + kernels) & 99.71 & 98.52 & 0.979 & 0.972 & 0.976 & 0.974 \\
+Random forest (path + kernels + exact) & 99.85 & \textbf{99.28} & 0.989 & \textbf{0.986} & 0.988 & 0.987 \\
+LightGBM (path + kernels + exact) & 99.82 & 99.04 & 0.988 & 0.982 & 0.985 & 0.984 \\
+\midrule
+\multicolumn{7}{@{}l}{\emph{Reference: uses JPL's MOID column$^\dagger$}} \\
+Definition on JPL MOID$^\dagger$ & 99.89 & 99.35 & 0.993 & 0.987 & 0.990 & 0.990 \\
+Random forest (orbit + JPL MOID) & 99.87 & 99.34 & 0.991 & 0.987 & 0.989 & 0.988 \\
+LightGBM (orbit + JPL MOID) & 99.82 & 99.17 & 0.985 & 0.984 & 0.985 & 0.984 \\
+\bottomrule
+\end{tabular}
+\end{table*}

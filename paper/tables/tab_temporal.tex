@@ -1,0 +1,22 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\caption{Temporal generalization: train on the 15,071 asteroids first observed before 2016, test on the 27,817 discovered since (2.5\% PHAs). RF: random forest; k: geometry kernels. $^\dagger$Uses JPL's MOID column.}
+\label{tab:temporal}
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Method (features) & Acc.\,\% & Prec. & Rec. & F1 & MCC \\
+\midrule
+Rule: exact geometry & \textbf{99.94} & \textbf{0.990} & 0.987 & \textbf{0.988} & \textbf{0.988} \\
+Rule: closed form & 99.72 & 0.944 & 0.943 & 0.944 & 0.942 \\
+LightGBM (path) & 99.18 & 0.822 & 0.848 & 0.835 & 0.831 \\
+LightGBM (path+k) & 99.86 & 0.967 & 0.977 & 0.972 & 0.971 \\
+XGBoost (path+k) & 99.86 & 0.973 & 0.969 & 0.971 & 0.971 \\
+RF (path+k+exact) & 99.93 & 0.981 & \textbf{0.991} & 0.986 & 0.986 \\
+\midrule
+Definition on JPL MOID$^\dagger$ & 99.95 & 0.991 & 0.990 & 0.990 & 0.990 \\
+RF (orbit+JPL MOID)$^\dagger$ & 99.94 & 0.980 & 0.994 & 0.987 & 0.987 \\
+\bottomrule
+\end{tabular}
+\end{table}

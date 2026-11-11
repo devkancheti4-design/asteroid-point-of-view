@@ -1,0 +1,22 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\caption{Head-to-head on identical asteroid-grouped folds, scored per close-approach row (306,590 rows). Asteroid's-view models are trained on the training asteroids' paths and their prediction is applied to every approach of each test asteroid.}
+\label{tab:samefolds}
+\setlength{\tabcolsep}{2.2pt}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Method & Acc.\,\% & F1 & MCC & AUC \\
+\midrule
+Earth: MLP & 92.63 & 0.398 & 0.410 & 0.9408 \\
+Earth: XGBoost & 91.84 & 0.414 & 0.388 & 0.9326 \\
+Earth: Random forest & 90.76 & 0.428 & 0.380 & 0.9230 \\
+\midrule
+Asteroid: rule, exact geometry & \textbf{99.79} & \textbf{0.988} & \textbf{0.987} & \textbf{0.9998} \\
+Asteroid: rule, closed form & 99.12 & 0.949 & 0.944 & 0.9908 \\
+Asteroid: LightGBM (path) & 96.95 & 0.822 & 0.806 & 0.9916 \\
+Asteroid: LightGBM (path + kernels) & 99.59 & 0.976 & 0.974 & 0.9994 \\
+Asteroid: XGBoost (path + kernels) & 99.55 & 0.974 & 0.971 & 0.9996 \\
+\bottomrule
+\end{tabular}
+\end{table}

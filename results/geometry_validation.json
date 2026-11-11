@@ -1,0 +1,19 @@
+{
+  "n_asteroids": 42888,
+  "n_pha": 2551,
+  "abs_diff_au": {
+    "median": 0.00010345175332156578,
+    "p90": 0.000474206382212473,
+    "p99": 0.0006025858699835457,
+    "max": 0.0018330256495465158
+  },
+  "share_within_1e-3_au": 0.9965025181869054,
+  "pearson_r": 0.9999969132399955,
+  "rule_label_agreement_ours_vs_jplmoid": 0.9997901510912143,
+  "jpl_flag_vs_rule_on_jpl_moid_disagreements": 49,
+  "d_lin_abs_err_vs_moid_path_for_moid_below_0.1": {
+    "median": 0.00030390790857284626,
+    "p90": 0.011131521013395885,
+    "p99": 0.07180176051472795
+  }
+}

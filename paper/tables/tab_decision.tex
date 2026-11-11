@@ -1,0 +1,25 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\caption{The decision procedure on all 42,888 labelled NEAs with their real 1$\sigma$ element uncertainties. Left: the law as specified; right: with the Earth-curve systematic $s_{\mathrm{sys}} = 2.4\times10^{-4}$\,au measured on the training folds (5-fold, by asteroid). Agreement is over decided asteroids; ``observe'' marks asteroids whose label could flip within their uncertainty.}
+\label{tab:decision}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Act & $s_{\mathrm{sys}} = 0$ & measured $s_{\mathrm{sys}}$ \\
+\midrule
+PHA & 2,496 & 2,466 \\
+Not PHA: geometry & 9,077 & 9,051 \\
+Not PHA: size ($H > 22$) & 31,127 & 31,127 \\
+Observe, nominal PHA & 37 & 67 \\
+Observe, nominal non-PHA & 151 & 177 \\
+Human referral & 0 & 0 \\
+\midrule
+Decided (coverage) & 99.56\% & 99.43\% \\
+Agrees with JPL flag & 99.869\% & 99.887\% \\
+\quad disagreements & 56 & 48 \\
+\quad flag contradicts definition & 48 & 48 \\
+Agrees with definition on JPL MOID & 99.981\% & 100.000\% \\
+\bottomrule
+\end{tabular}
+\end{table}

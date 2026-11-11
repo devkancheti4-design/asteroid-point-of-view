@@ -1,0 +1,32 @@
+{
+  "L1_radial_gap_violations": 0,
+  "L2_node_gap_violations": 0,
+  "L1_L2_n": 42888,
+  "L3_n": 37214,
+  "L3_lower_violations": 0,
+  "L3_upper_violations": 0,
+  "L3_width_max_for_delta_le_0.05_au": 1.9519244829881155e-05,
+  "L3_width_median_for_delta_le_0.05_au": 7.700360201146061e-07,
+  "P1_synthetic_orbits": 198,
+  "P1_samples_per_orbit": 40000,
+  "P1_min_of_closest_approach_minus_moid_au": 8.590233397609559e-06,
+  "P1_violations": 0,
+  "P1_jpl_approaches": 306590,
+  "P1_jpl_share_dist_ge_moid_minus_1e-4": 0.9875664568315992,
+  "P1_jpl_share_by_era": {
+    "1910-1969": 0.9871048841604022,
+    "1970-1999": 0.9923239197005784,
+    "2000-2024": 0.9849635372415746
+  },
+  "P0_cad_predicted_seen_share_5fold": 0.9568679454632876,
+  "P0_cad_observed_seen_share_5fold": 0.9568968329038782,
+  "P0_kaggle_predicted_seen_share_10fold": 0.3476499607424792,
+  "P0_kaggle_observed_seen_share_10fold": 0.34883382234128507,
+  "P2_mismatches": 0,
+  "T1_PHA_with_H_gt_22": 0,
+  "T1_PHA_with_delta_gt_0.05": 0,
+  "T1_NOT_PHA_GEOMETRY_with_delta_le_0.05": 0,
+  "T1_NOT_PHA_SIZE_with_H_le_22": 0,
+  "T1_max_steps": 6,
+  "T1_decided": 42700
+}

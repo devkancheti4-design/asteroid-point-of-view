@@ -1,0 +1,23 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\caption{Earth's-view benchmark on 306,590 JPL close approaches (36,817 asteroids). Row split: stratified 5-fold over rows, as in prior work (95.7\% of test rows belong to an asteroid seen in training). Grouped: all approaches of an asteroid share a fold. Means over 5 folds.}
+\label{tab:earthview}
+\setlength{\tabcolsep}{2.4pt}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+ & \multicolumn{3}{c}{Row split (leaky)} & \multicolumn{3}{c}{Grouped (honest)} \\
+\cmidrule(lr){2-4}\cmidrule(l){5-7}
+Model & Acc.\,\% & F1 & MCC & Acc.\,\% & F1 & MCC \\
+\midrule
+Logistic regression & 91.12 & 0.279 & 0.268 & 91.09 & 0.277 & 0.266 \\
+$k$-NN ($k{=}5$) & 92.48 & 0.514 & 0.479 & 91.09 & 0.425 & 0.381 \\
+MLP & 92.67 & 0.400 & 0.413 & \textbf{92.63} & 0.398 & \textbf{0.410} \\
+LightGBM & 93.21 & 0.479 & 0.480 & 92.02 & 0.397 & 0.382 \\
+XGBoost & 93.27 & 0.513 & 0.500 & 91.84 & 0.414 & 0.388 \\
+Random forest & \textbf{94.74} & \textbf{0.676} & \textbf{0.650} & 90.76 & \textbf{0.428} & 0.380 \\
+\midrule
+Always ``not hazardous'' & 91.26 & 0.000 & 0.000 & 91.26 & 0.000 & 0.000 \\
+\bottomrule
+\end{tabular}
+\end{table}

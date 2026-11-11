@@ -1,0 +1,13 @@
+{
+  "rows": 306590,
+  "asteroids": 36817,
+  "positive_rows": 26784,
+  "positive_rate_rows": 0.08736097067745197,
+  "positive_asteroids": 2457,
+  "approaches_per_asteroid_mean": 8.32740310182796,
+  "approaches_per_asteroid_median": 4.0,
+  "test_rows_with_asteroid_in_train": {
+    "row_split": 0.9568968329038782,
+    "asteroid_grouped": 0.0
+  }
+}
