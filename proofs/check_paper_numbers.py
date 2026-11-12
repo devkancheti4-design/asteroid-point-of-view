@@ -10,6 +10,7 @@ Exit status 1 on any failure.
 from __future__ import annotations
 
 import json
+import math
 import re
 import sys
 from pathlib import Path
@@ -188,6 +189,37 @@ CLAIMS = [
     ("leak formula Kaggle", r"it gives 34.8\%", pct(pc["P0_kaggle_predicted_seen_share_10fold"], 1)),
     ("approaches below MOID", r"this happens for 1.2\% of approaches", pct(1 - pc["P1_jpl_share_dist_ge_moid_minus_1e-4"], 1)),
     ("bracket width", r"the widest observed on the catalogue is $1.95\times10^{-5}\au$", f"{pc['L3_width_max_for_delta_le_0.05_au'] * 1e5:.2f}"),
+]
+
+# Statistical evidence against the state of the art (src/sota_evidence.py), recomputed here from its JSON.
+se = j("sota_evidence.json")
+seR, seM, seA = se["paired"]["rule"], se["paired"]["models"], se["asteroid_level"]
+by_recall = min(seM, key=lambda m: m["fn"])
+by_acc = min(seM, key=lambda m: m["errors"])
+p_err = math.ceil(max(m["log10_p_errors"] for m in seM))
+p_miss = math.ceil(max(m["log10_p_missed"] for m in seM))
+ceil_gap = max(se["summary"][b]["ceiling_acc"] - se["summary"][b]["rule_acc"] for b in ("cad", "sbdb", "kaggle"))
+CLAIMS += [
+    ("paired rule errors", r"The rule makes 648 errors, against at least 22,602", f"{seR['errors']}"),
+    ("paired best model errors", r"The rule makes 648 errors, against at least 22,602", f"{by_acc['errors']:,}"),
+    ("paired rule missed", r"misses 468 of the 26,784 PHA approaches, against at least 4,614", f"{seR['fn']}"),
+    ("paired PHA rows", r"misses 468 of the 26,784 PHA approaches, against at least 4,614", f"{seR['p']:,}"),
+    ("paired best model missed", r"misses 468 of the 26,784 PHA approaches, against at least 4,614", f"{by_recall['fn']:,}"),
+    ("paired best-recall model alarms", r"which pays for it with 35,232 false alarms", f"{by_recall['fp']:,}"),
+    ("paired p errors", r"rejected at $p<10^{-5715}$ for every model", f"{p_err}"),
+    ("paired p missed", r"no fewer PHA approaches at $p<10^{-853}$", f"{p_miss}"),
+    ("paired p missed (contributions)", r"least favourable case ($p<10^{-853}$)", f"{p_miss}"),
+    ("folds won", r"wins all 5 folds on accuracy, F1 and MCC against every model",
+     "5" if all(v == se["paired"]["folds"] == 5 for m in seM for v in m["folds_won"].values()) else "FAIL"),
+    ("ceiling gap", r"within 0.13 points of accuracy of the ceiling", f"{100 * ceil_gap:.2f}"),
+    ("value: best-recall model", r"misses 4,614 of the 26,784 PHA approaches while raising 35,232 false alarms", f"{by_recall['fn']:,}"),
+    ("value: most accurate model", r"the most accurate one misses 19,313", f"{by_acc['fn']:,}"),
+    ("value: rule", r"the rule misses 468 and raises 180 false alarms", f"{seR['fp']}"),
+    ("value: catalogue missed", r"misses 38 of the 2,551 PHAs and flags 20 of the 40,337 other NEAs", f"{seA['fn']}"),
+    ("value: catalogue PHAs", r"misses 38 of the 2,551 PHAs and flags 20 of the 40,337 other NEAs", f"{seA['p']:,}"),
+    ("value: catalogue alarms", r"misses 38 of the 2,551 PHAs and flags 20 of the 40,337 other NEAs", f"{seA['fp']}"),
+    ("value: catalogue others", r"misses 38 of the 2,551 PHAs and flags 20 of the 40,337 other NEAs", f"{seA['n'] - seA['p']:,}"),
+    ("conclusion missed", r"it misses 468 PHA approaches where the best of nine models misses at least 4,614", f"{by_recall['fn']:,}"),
 ]
 
 

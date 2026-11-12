@@ -1,6 +1,6 @@
 # The Asteroid's Point of View
 
-Code, data pipeline and paper for **"The Asteroid's Point of View: Path Geometry and Leakage-Free Evaluation for Potentially Hazardous Asteroid Classification"** by Ch. Satwik and Devieswar Kancheti ([paper/main.pdf](paper/main.pdf)).
+Code, data pipeline and paper for **"The Asteroid's Point of View: Path Geometry and Leakage-Free Evaluation for Potentially Hazardous Asteroid Classification"** by Ch. Satwik and Devieswar Kancheti, in IEEE conference format ([paper/main.pdf](paper/main.pdf)) and in MDPI's journal template ([paper/main_mdpi.pdf](paper/main_mdpi.pdf), submission version for *Machine Learning and Knowledge Extraction*).
 
 Prior machine-learning work classifies potentially hazardous asteroids (PHAs) from Earth's point of view: one row per close approach, with miss distance and relative velocity. This project describes each asteroid only by its own orbit (path) and size, and judges hazard from the geometry of that path relative to Earth's orbit as a fixed curve, so the timing of individual encounters drops out.
 
@@ -14,6 +14,8 @@ Prior machine-learning work classifies potentially hazardous asteroids (PHAs) fr
 | All 42,888 NEAs, 5-fold over asteroids | training-free path rule | 99.86% | 0.989 | 0.988 |
 | All 42,888 NEAs, 5-fold over asteroids | closed-form tangent-line rule | 99.26% | 0.938 | 0.934 |
 | Ceiling (definition on JPL's own MOID) | reference | 99.89% | 0.990 | 0.990 |
+
+**Statistical proof against the state of the art.** On the identical 306,590 test rows, the rule makes 648 errors and misses 468 of the 26,784 PHA approaches; each of the nine Earth's-view models (including a CNN, GPBoost and a tuned random forest) makes at least 22,602 errors and misses at least 4,614. Each fold's exact confusion counts are decoded from the stored metrics, and an exact one-sided McNemar test, evaluated in the least favourable case (disjoint error sets), gives p < 10^-5715 for errors and p < 10^-853 for missed PHAs against every model; the rule also wins all 5 folds on accuracy, F1 and MCC (`src/sota_evidence.py`, checked independently by `proofs/check_sota_evidence.py`). Over the whole catalogue the rule misses 38 of the 2,551 PHAs and raises 20 false alarms among 40,337 other NEAs, with no training.
 
 With each asteroid's real orbit uncertainties, the decision law (with the Earth-curve systematic measured on training folds) decides 99.43% of the 42,888 NEAs, agrees with the PHA definition evaluated on JPL's own MOID for every decided asteroid, and flags 244 (0.57%) for follow-up. Its only disagreements with JPL's flags are 48 flags that contradict JPL's own definition.
 
@@ -59,10 +61,12 @@ One Sentry object has no absolute magnitude in JPL's catalogue and is not scored
 | `src/kernel_realdata.py` | Runs `pha_core` on the real catalogue: bound-checked MOID vs JPL, screening, score fit, decision law with and without `s_sys` |
 | `src/kaggle_compare.py` | Same-file comparison on the Kaggle table behind the highest published accuracy, including the memorisation check |
 | `src/sheet_comparison.py`, `src/cnn_worker.py` | The received score sheet's three models (CNN, GPBoost, tuned random forest) against ours: decodes the sheet, reruns all four methods on the delivered NASA CAD, Sentry and Scout files with one label and the same folds, and on the full NASA CAD table. The CNN trains in its own process (PyTorch's OpenMP runtime crashes next to the one GPBoost, LightGBM and XGBoost load) |
+| `src/sota_evidence.py` | Exact paired test against the nine Earth's-view models on identical rows (counts decoded from the fold metrics, McNemar bound in the least favourable case) and the summary of every benchmark against the best published result (Tables X and XI of the IEEE version) |
+| `src/make_mdpi.py`, `paper/Definitions/` | Generates `paper/main_mdpi.tex` (MDPI's official article template, submission version) from `paper/main.tex`, so both versions always carry the same text, tables and proofs; `paper/Definitions/` is MDPI's template class, with its two logos loaded as PDF copies because Tectonic cannot embed EPS |
 | `src/make_sheet_xlsx.py` | The same comparison as an Excel workbook with the received sheet's tabs (`results/NASA_Asteroid_Comparative_Results_with_Ours.xlsx`) |
 | `data/external/` | The received score sheet and the three NASA files delivered with it, with SHA-256 sums |
 | `src/verify_proofs.py` | Numerical check of every lemma, proposition and theorem proved in the paper's Appendix A, on the real catalogue and synthetic orbits |
-| `proofs/verify_all.sh` | One command that reruns every check (decision law on all 2^32 inputs, kernel and pipeline tests, Appendix A statements, an audit of 100 numbers in the paper's text, the video's numbers, data checksums, the score-sheet comparison, the Kaggle notebook) and writes `proofs/REPORT.md` |
+| `proofs/verify_all.sh` | One command that reruns every check (decision law on all 2^32 inputs, kernel and pipeline tests, Appendix A statements, an audit of 119 numbers in the paper's text, the video's numbers, data checksums, the score-sheet comparison, the Kaggle notebook, the statistical evidence) and writes `proofs/REPORT.md` |
 | `proofs/check_sheet_comparison.py` | Independent check of the score-sheet comparison: decodes the received sheet by exact fractions, recomputes labels and our rule from the raw JPL catalogue, and checks every summary and every workbook cell |
 | `proofs/check_notebook.py` | Runs the Kaggle notebook on the snapshot and checks that it reproduces `results/` (every asteroid's distance, the 5-fold, temporal, same-fold and uncertainty results) |
 | `proofs/compare_runs.py`, `proofs/REPRODUCTION.md` | File-by-file comparison of two complete runs (every number in `results/` and every generated table), and the record of the clean-clone reproductions |
@@ -88,7 +92,7 @@ To rerun everything on freshly downloaded data instead (JPL updates its catalogu
 ./run_all.sh
 ```
 
-Either way the script creates `.venv`, installs `requirements.txt`, runs every experiment (about 1.5 hours on a laptop, 45 minutes of it the score-sheet comparison), compiles `paper/main.pdf` and finishes with `proofs/verify_all.sh`, which writes `proofs/REPORT.md`. Two clean-clone reproductions and their file-by-file comparison are recorded in [proofs/REPRODUCTION.md](proofs/REPRODUCTION.md).
+Either way the script creates `.venv`, installs `requirements.txt`, runs every experiment (about 1.5 hours on a laptop, 45 minutes of it the score-sheet comparison), compiles `paper/main.pdf` and `paper/main_mdpi.pdf` and finishes with `proofs/verify_all.sh`, which writes `proofs/REPORT.md`. Two clean-clone reproductions and their file-by-file comparison are recorded in [proofs/REPRODUCTION.md](proofs/REPRODUCTION.md).
 
 ## Data source
 

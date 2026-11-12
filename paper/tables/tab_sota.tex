@@ -1,0 +1,25 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\caption{Paired test against the nine Earth's-view models on identical rows: the 306,590 NASA CAD approaches (26,784 to PHAs) of the asteroid-grouped folds of Table~\ref{tab:earthview}, counts pooled over the 5 folds. $p$: exact one-sided McNemar test of the hypothesis that the rule makes no fewer errors (misses no fewer PHA approaches) than the model, evaluated in the least favourable case, where the two error sets are disjoint; the true $p$ is smaller. The rule wins all 5 folds on accuracy, F1 and MCC against every model.}
+\label{tab:sota}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrll@{}}
+\toprule
+Method & Errors & Missed & False & $p$ & $p$ \\
+ & & PHA & alarms & (errors) & (missed) \\
+\midrule
+Path rule (ours) & \textbf{648} & \textbf{468} & 180 & -- & -- \\
+\midrule
+MLP & 22,602 & 19,313 & 3,289 & $<10^{-5715}$ & $<10^{-4994}$ \\
+CNN & 22,657 & 19,819 & 2,838 & $<10^{-5731}$ & $<10^{-5141}$ \\
+LightGBM & 24,477 & 18,722 & 5,755 & $<10^{-6258}$ & $<10^{-4822}$ \\
+XGBoost & 25,021 & 17,936 & 7,085 & $<10^{-6415}$ & $<10^{-4594}$ \\
+GPBoost & 26,784 & 26,784 & 0 & $<10^{-6927}$ & $<10^{-7177}$ \\
+Logistic reg. & 27,303 & 21,548 & 5,755 & $<10^{-7078}$ & $<10^{-5645}$ \\
+$k$-NN & 27,328 & 16,682 & 10,646 & $<10^{-7085}$ & $<10^{-4231}$ \\
+Random forest & 28,324 & 16,189 & 12,135 & $<10^{-7375}$ & $<10^{-4089}$ \\
+Tuned RF & 39,846 & 4,614 & 35,232 & $<10^{-10748}$ & $<10^{-853}$ \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -72,7 +72,7 @@ Our contributions are:
 \begin{itemize}
 \item A leakage audit of the Earth's-view benchmark on 306,590 JPL close approaches. Row-wise splits put 95.7\% of test rows next to their own asteroid in training; with grouped splits the best PHA-class F1 of the six prior-work models falls from 0.68 to 0.43, and no model we tried, including a convolutional network, GPBoost and a tuned random forest, exceeds 0.53.
 \item An asteroid's-view formulation: a path kernel; an exact path-to-path distance checked against two-sided bounds and computed by two independent solvers that agree within $7\times10^{-10}\au$ (median deviation $1.0\times10^{-4}\au$ from JPL's MOID); closed-form bounds and a tangent-line kernel; Öpik encounter variables; and a dimensionless, training-free hazard index.
-\item State-of-the-art results under leakage-free evaluation: 99.86\% accuracy and F1 0.989 on all 42,888 labelled NEAs without training; F1 0.99 instead of at most 0.53 on identical folds; no loss on post-2016 discoveries.
+\item State-of-the-art results under leakage-free evaluation: 99.86\% accuracy and F1 0.989 on all 42,888 labelled NEAs without training; F1 0.99 instead of at most 0.53 on identical folds, a gap that an exact paired test confirms against each of nine models even in the least favourable case ($p<10^{-853}$); no loss on post-2016 discoveries.
 \item A decision layer with explicit abstention: a delta-method hazard probability on the signed distance, Monte Carlo where linearisation fails, and a branch-free decision law, machine-authored by integer program synthesis and verified on all $2^{32}$ inputs. With real orbit uncertainties it decides 99.43\% of NEAs, with no disagreement against the definition evaluated on JPL's MOID.
 \item Complete proofs of every bound, equivalence and guarantee used (Appendix~\ref{app:proofs}), each confirmed numerically on the full catalogue (Appendix~\ref{app:verify}).
 \item A path-cloud extension for uncertain orbits. In simulations built from the real error bars of short-arc NEAs, it is as accurate as the single-orbit rule (MCC within 0.002) and lowers the Brier score by 30--36\%.
@@ -118,7 +118,7 @@ Leakage, where information about the test set reaches training, is a leading cau
 \subsection{Asteroid catalogue}
 We queried the SBDB API~\cite{jpl_sbdb_api} on 11 November 2026 for all 43,025 near-Earth asteroids, retrieving osculating elements $(a, e, i, \Omega, \omega, M)$, $H$, element uncertainties, the orbit condition code, the first observation date, and JPL's Earth MOID and PHA flag. Of these, 42,888 have both an MOID and a flag (2,551 PHAs, 5.9\%); the 137 others are mostly unconstrained orbits (condition code 9).
 
-\subsection{Close approaches (Earth's view)}
+\subsection{Close approaches (Earth's view)}\label{sec:cad}
 From the Close-Approach Data API~\cite{jpl_cad_api} we retrieved all approaches of NEOs to Earth within $0.5\au$ from 1910 to 2024, mirroring the NeoWs feed. Of 306,903 approaches, 306,590 belong to a labelled asteroid; they cover 36,817 asteroids, 8.74\% of rows are PHA approaches, and an asteroid contributes a median of 4 (mean 8.3, maximum 206) approaches. Each row receives the NeoWs features: $H$, the estimated diameter range for albedos 0.25 and 0.05, relative velocity and miss distance.
 
 \subsection{The Kaggle NeoWs table}
@@ -140,7 +140,7 @@ $\hat{\mathbf{P}} = (\cos\omega\cos\Omega - \sin\omega\sin\Omega\cos i,\ \cos\om
 $\hat{\mathbf{Q}} = (-\sin\omega\cos\Omega - \cos\omega\sin\Omega\cos i,\ -\sin\omega\sin\Omega + \cos\omega\cos\Omega\cos i,\ \cos\omega\sin i)$.
 Earth's orbit is the fixed curve $\mathbf{E}(\lambda) = R(\lambda)(\cos\lambda, \sin\lambda, 0)$ with $R(\lambda) = p_\oplus/[1 + e_\oplus\cos(\lambda - \varpi_\oplus)]$, using the J2000 mean elements of the Earth--Moon barycentre~\cite{standish_approx} and neglecting its $1.5\times10^{-5}$\,deg inclination.
 
-\subsection{Exact path-to-path distance}
+\subsection{Exact path-to-path distance}\label{sec:exact}
 The hazard-relevant geometry is the distance between the two curves,
 \begin{equation}
 \delta = \min_{f,\,\lambda}\ \lVert \mathbf{r}(f) - \mathbf{E}(\lambda) \rVert .
@@ -276,16 +276,24 @@ Table~\ref{tab:sheet} adds a convolutional network, GPBoost and a tuned random f
 
 \input{tables/tab_sheet}
 
+\subsection{Statistical evidence against the state of the art}
+Table~\ref{tab:sota} pairs the rule with each of the nine Earth's-view models on the same 306,590 test rows. The rule makes 648 errors, against at least 22,602 for every model, and misses 468 of the 26,784 PHA approaches, against at least 4,614 (the tuned random forest, which pays for it with 35,232 false alarms). A valid paired test does not need the row-level predictions: each fold's exact confusion counts follow from the stored metrics, because accuracy times the test size and recall times the number of positives must be integers for all ten methods at once, and an exact one-sided McNemar test can then be evaluated in the least favourable case, where the error sets of the two methods are disjoint. Even then, the hypothesis that the rule is no more accurate than a model is rejected at $p<10^{-5715}$ for every model, and the hypothesis that it misses no fewer PHA approaches at $p<10^{-853}$. The rule also wins all 5 folds on accuracy, F1 and MCC against every model. Table~\ref{tab:sotasummary} collects every benchmark. Where the published protocol leaks, the honest rerun of the best model falls below its published number, whereas the rule does not depend on the split; on every benchmark the rule matches or exceeds the best honest result and comes within 0.13 points of accuracy of the ceiling set by the definition itself.
+
+\input{tables/tab_sota}
+\input{tables/tab_sota_summary}
+
 \section{Discussion}
 
 \emph{Why the asteroid's view wins.} The PHA flag is a property of a path. Each close approach samples the distance between the two bodies at one moment, and for the orbits of that moment it can never be smaller than the distance between their paths (Proposition~\ref{prop:miss}); because real orbits drift, 1.2\% of JPL's recorded approaches even come closer than today's MOID, one more source of noise in the Earth's view. An Earth's-view model must infer the path from a few such samples; the asteroid's view computes it.
 
 \emph{What ``beating the state of the art'' means here.} For a label defined by geometry, the best possible classifier reconstructs the definition, and once the path is known, physics does so without training. The open problems lie elsewhere: orbits known only roughly, as in our simulation; objects seen for only a few nights; and impact probability itself, which requires impact monitoring~\cite{milani2005,roa2021}. On the file behind the highest reported accuracy, honest evaluation turns a 0.2-point advantage into a tie, which shows how much of the published margin is leakage. A decision layer that abstains where the label could flip, and that never disagrees with the definition where it does decide, is the honest form of a state-of-the-art claim for this label; as a by-product, a bound-checked recomputation exposes catalogue flags that contradict the definition. We recommend that future benchmarks group splits by asteroid, report F1 and MCC rather than accuracy alone, state whether label-defining inputs such as MOID and $H$ are used, and focus on settings with genuine uncertainty.
 
+\emph{Why it matters.} The difference lies in the hazards that are missed. On the same approaches, the best of the nine models by recall misses 4,614 of the 26,784 PHA approaches while raising 35,232 false alarms, and the most accurate one misses 19,313; the rule misses 468 and raises 180 false alarms. Over the whole catalogue the rule misses 38 of the 2,551 PHAs and flags 20 of the 40,337 other NEAs. It needs no labels or retraining, so it applies unchanged to every new discovery, and it scores all 42,888 asteroids in about 12 s on a laptop. The decision law then settles 99.43\% of NEAs with no disagreement against the definition and leaves 244 for follow-up, so observing time goes where the status is genuinely uncertain. Finally, grouped evaluation measures what a deployed classifier faces, namely asteroids it has never seen.
+
 \emph{Limitations.} We use osculating elements at a single epoch, whereas the MOID drifts over decades through planetary perturbations. Earth's orbit is approximated by fixed J2000 mean elements, which causes differences of order $10^{-4}\au$. The simulation treats element errors as independent Gaussians, whereas real short-arc errors are correlated and non-Gaussian~\cite{milani_gronchi2009}, and it ignores uncertainty in $H$. Finally, PHA status is not impact probability.
 
 \section{Conclusion}
-Looking from the asteroid rather than from Earth turns PHA classification from a noisy learning problem into a geometric one. A training-free path rule achieves 99.86\% accuracy and F1 0.989 on all known NEAs under leakage-free evaluation, far above Earth's-view models evaluated honestly (F1 at most 0.53). With real orbit uncertainties, a verified decision law decides 99.43\% of NEAs without a single disagreement against the definition evaluated on JPL's MOID and flags the rest for follow-up. For orbits that are not yet well known, treating the path as a cloud keeps the hard decisions as good as the best single-orbit rule while making the hazard probabilities 30--36\% better calibrated in Brier score.
+Looking from the asteroid rather than from Earth turns PHA classification from a noisy learning problem into a geometric one. A training-free path rule achieves 99.86\% accuracy and F1 0.989 on all known NEAs under leakage-free evaluation, far above Earth's-view models evaluated honestly (F1 at most 0.53); on identical rows it misses 468 PHA approaches where the best of nine models misses at least 4,614. With real orbit uncertainties, a verified decision law decides 99.43\% of NEAs without a single disagreement against the definition evaluated on JPL's MOID and flags the rest for follow-up. For orbits that are not yet well known, treating the path as a cloud keeps the hard decisions as good as the best single-orbit rule while making the hazard probabilities 30--36\% better calibrated in Brier score.
 
 \input{appendix}
 

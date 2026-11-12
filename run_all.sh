@@ -61,8 +61,11 @@ fi
 "$PY" verify_proofs.py                              # numerical checks of every statement in Appendix A
 "$PY" make_figures.py
 "$PY" make_tables.py
+"$PY" sota_evidence.py                              # exact paired test vs the nine Earth's-view models; summary vs SOTA
+"$PY" make_mdpi.py                                  # MDPI journal version, generated from main.tex
 cd ../paper
 tectonic -X compile main.tex
+tectonic -X compile main_mdpi.tex
 cd ..
 ./proofs/verify_all.sh                               # every check, one report: proofs/REPORT.md
-echo "done: paper/main.pdf, proofs/REPORT.md (video: .venv/bin/python presentation/make_video.py)"
+echo "done: paper/main.pdf (IEEE), paper/main_mdpi.pdf (MDPI), proofs/REPORT.md (video: .venv/bin/python presentation/make_video.py)"

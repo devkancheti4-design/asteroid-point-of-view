@@ -10,7 +10,8 @@
 #   8. SHA-256 check of the received score sheet and the three NASA files delivered with it (data/external)
 #   9. the score-sheet comparison recomputed independently (proofs/check_sheet_comparison.py)
 #  10. the Kaggle notebook run on the snapshot reproduces results/ (proofs/check_notebook.py)
-# Steps 4-6, 9 and 10 read results/; run ./run_all.sh first on a fresh checkout.
+#  11. the statistical evidence against the state of the art recomputed independently (proofs/check_sota_evidence.py)
+# Steps 4-6 and 9-11 read results/; run ./run_all.sh first on a fresh checkout.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 PY="$PWD/.venv/bin/python"
@@ -43,6 +44,7 @@ run "8. Received score sheet and delivered NASA files (SHA-256 verified)" \
     bash -c "cd data/external && shasum -a 256 -c SHA256SUMS.txt"
 run "9. Score-sheet comparison recomputed independently" "$PY" proofs/check_sheet_comparison.py
 run "10. Kaggle notebook reproduces the results" "$PY" proofs/check_notebook.py
+run "11. Statistical evidence against the state of the art recomputed independently" "$PY" proofs/check_sota_evidence.py
 rm -f proofs/pha_law_check
 echo
 if [ "$FAILED" = 0 ]; then echo "ALL CHECKS PASS -> $OUT"; else echo "SOME CHECKS FAILED -> $OUT"; exit 1; fi

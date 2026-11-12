@@ -1,6 +1,6 @@
 # Verification report
 
-Generated 2026-11-11 17:04 UTC on Darwin arm64 by proofs/verify_all.sh.
+Generated 2026-11-12 04:39 UTC on Darwin arm64 by proofs/verify_all.sh.
 
 ## 1. Decision law equals its specification on all 2^32 inputs
 
@@ -26,7 +26,7 @@ pha_law vs specification over all 4294967296 int32 inputs: 0 mismatches
 K1: nodes on the reference plane, |r| law, orthonormal basis, rotation-matrix agreement
   worst |z at nodes| 1.04e-15 au, | |r| - p/(1+e cos f) | 7.11e-15, |B B^T - I| 4.44e-16, basis vs matrices 2.22e-16
 K2: exact MOID vs the independent brute force; bound order L0 <= L_lon <= MOID <= U_lon <= U_node
-  310 orbits (300 synthetic + 10 edge cases) in 44 s
+  310 orbits (300 synthetic + 10 edge cases) in 38 s
   |MOID - brute force|: max 2.56e-11 au, median 2.22e-16;  bound order violated on 0;  uncertified 0
   certified gap U_lon - L_lon where MOID < 0.2 au: max 9.40e-05 au (n=110)
 K2: vectorised moid_batch vs moid (elliptic)
@@ -125,7 +125,7 @@ T1_decided: 42700
 ## 5. Paper numbers recomputed from results/
 
 ```
-100 of 100 paper numbers recomputed from results/ and found in the LaTeX source
+119 of 119 paper numbers recomputed from results/ and found in the LaTeX source
   timing, ms per asteroid: paper 0.66, this run 0.66 (machine-dependent; within 10x: True)
 ```
 
@@ -231,7 +231,7 @@ cad_earth.csv          /Users/kanchetidevieswar/near earth objects (neo)/data/pr
 cad.csv                /Users/kanchetidevieswar/near earth objects (neo)/data/external/cad.csv
 sentry_risk_list.csv   /Users/kanchetidevieswar/near earth objects (neo)/data/external/sentry_risk_list.csv
 scout.csv              /Users/kanchetidevieswar/near earth objects (neo)/data/external/scout.csv
-42,888 near-Earth asteroids (2,551 PHAs): path-to-path distance for all of them in 14.1 s   [paper: 42,888 asteroids, 2,551 PHAs]
+42,888 near-Earth asteroids (2,551 PHAs): path-to-path distance for all of them in 12.2 s   [paper: 42,888 asteroids, 2,551 PHAs]
 |delta - JPL MOID|: median 1.03e-04 au, 99th percentile 6.03e-04 au, max 1.83e-03 au   [paper: 1.03e-04, 6.03e-04, 1.83e-03]
 same PHA verdict from our delta as from JPL's MOID: 99.979%   [paper: 99.979%]
 paper: ours accuracy 0.99865, F1 0.98859, MCC 0.98788; tangent line 0.99263 / 0.93811
@@ -247,7 +247,7 @@ paper, grouped: no baseline above 0.9263 accuracy (MLP) or F1 0.428 (random fore
 CAD table: 33 rows, 33 scored (an orbit and H in JPL SBDB), 2 PHAs -> TP 2, FP 0, FN 0, TN 31; accuracy 1.0000, F1 1.0000
 Sentry risk list: 2,242 rows, 2,241 scored (an orbit and H in JPL SBDB), 15 PHAs -> TP 15, FP 0, FN 0, TN 2226; accuracy 1.0000, F1 1.0000
 Scout: 72 unconfirmed candidates, 0 of them in JPL SBDB (no ground truth). The rule on Scout's own MOID and H flags 1:
-11,054 well-determined asteroids (2,039 hazardous), 48 clones each, 107 s
+11,054 well-determined asteroids (2,039 hazardous), 48 clones each, 90 s
 paper (short-arc profiles, scale 1): point rule 0.9846 / MCC 0.9489 / Brier 0.0154; path cloud 0.9846 / 0.9487 / 0.0105
 
 -- comparison with results/
@@ -262,6 +262,26 @@ PASS  rule on the delivered CAD and Sentry files equals results/sheet_comparison
 PASS  uncertainty simulation (short-arc profiles, scale 1) equals results/uncertainty_cc8-9_summary.csv  [max diff 0.0e+00]
 
 ALL PASS
+```
+
+**PASS**
+
+## 11. Statistical evidence against the state of the art recomputed independently
+
+```
+PASS fold sizes add up to 306,590 rows, 26,784 PHA rows
+PASS rule: 468 missed, 180 false alarms, as in sota_evidence.json
+PASS MLP: errors 22,602, missed 19,313, log10 p -5715.7 / -4994.6, in JSON and Table
+PASS CNN: errors 22,657, missed 19,819, log10 p -5731.6 / -5141.7, in JSON and Table
+PASS LightGBM: errors 24,477, missed 18,722, log10 p -6258.0 / -4822.9, in JSON and Table
+PASS XGBoost: errors 25,021, missed 17,936, log10 p -6415.7 / -4594.9, in JSON and Table
+PASS GPBoost: errors 26,784, missed 26,784, log10 p -6927.5 / -7177.8, in JSON and Table
+PASS LogReg: errors 27,303, missed 21,548, log10 p -7078.4 / -5645.4, in JSON and Table
+PASS KNN: errors 27,328, missed 16,682, log10 p -7085.6 / -4232.0, in JSON and Table
+PASS RandomForest: errors 28,324, missed 16,189, log10 p -7375.5 / -4089.6, in JSON and Table
+PASS Tuned RF: errors 39,846, missed 4,614, log10 p -10748.9 / -853.2, in JSON and Table
+PASS summary table carries the JSON values
+all checks passed
 ```
 
 **PASS**

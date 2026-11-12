@@ -1,0 +1,18 @@
+\begin{table*}[t]
+\centering
+\footnotesize
+\caption{Every benchmark against the best published result. ``Honest'': split by asteroid, so no test asteroid is seen in training; best ML values are the best of the models tried, per column. Ceiling: the PHA definition applied to JPL's (Kaggle: the table's) own MOID. Published numbers use the protocols of Table~\ref{tab:literature}.}
+\label{tab:sotasummary}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{3.1cm}YYY>{\raggedright\arraybackslash}p{2.2cm}@{}}
+\toprule
+Benchmark & Best published (protocol) & Best ML, honest split & Our training-free rule & Ceiling \\
+\midrule
+NASA CAD, 306,590 approaches & RF, row split: 94.74\%, F1 0.676 & 92.63\%, F1 0.527 (9 models) & \textbf{99.79\%, F1 0.988} & 99.82\%, F1 0.989 \\
+SBDB, 42,888 NEAs & graph NN~\cite{jacques2025}: 99\%, F1 0.37 & RF, path features: 99.85\%, F1 0.988 & \textbf{99.86\%, F1 0.989} & 99.89\%, F1 0.990 \\
+Kaggle NeoWs table, 4,687 records & RF by record~\cite{chandra2025}: 99.7\% (99.62\% reproduced) & RF by asteroid: 99.42\%, F1 0.982 & \textbf{99.42\%, F1 0.982} & 99.55\%, F1 0.986 \\
+Received sheet: CAD file, 33 approaches & CNN, GPBoost, RF: 72--75\%, task unstated & 93.94\%, F1 0.000 & \textbf{100.00\%, F1 1.000} & -- \\
+Received sheet: Sentry list, 2,241 objects & CNN, GPBoost, RF: 72--75\%, task unstated & 99.70\%, F1 0.784 & \textbf{100.00\%, F1 1.000} & -- \\
+\bottomrule
+\end{tabularx}
+\end{table*}

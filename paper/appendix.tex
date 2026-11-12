@@ -28,7 +28,7 @@ Assign each row independently to the test set with probability $\rho$. A test ro
 \begin{IEEEproof}
 Given that a row is in the test set, each of the asteroid's other $m - 1$ rows is in training with probability $1 - \rho$, independently, so the probability that none of them is in training is $\rho^{m-1}$. Asteroid $a$ contributes $m_a\rho$ test rows in expectation; summing $m_a\rho(1 - \rho^{m_a-1})$ over asteroids and dividing by $\sum_a m_a\rho$ gives the stated ratio.
 \end{IEEEproof}
-With the close-approach multiplicities of Section~III-B and $\rho = 0.2$ (5-fold), the formula gives 95.69\%, against 95.69\% observed; for the Kaggle table and $\rho = 0.1$ (10-fold) it gives 34.8\%, against 34.9\% observed. The leakage is therefore a property of the data's multiplicities, not of a particular split.
+With the close-approach multiplicities of Section~\ref{sec:cad} and $\rho = 0.2$ (5-fold), the formula gives 95.69\%, against 95.69\% observed; for the Kaggle table and $\rho = 0.1$ (10-fold) it gives 34.8\%, against 34.9\% observed. The leakage is therefore a property of the data's multiplicities, not of a particular split.
 
 \begin{lemma}[Radial gap]\label{lem:radial}
 $L_0 = \max(0,\ q - Q_\oplus,\ q_\oplus - Q) \le \delta$.
@@ -69,7 +69,7 @@ U_{\mathrm{lon}} - L_{\mathrm{lon}} &\le \sqrt{z^{*2} + g^{*2}} - \sqrt{z^{*2} +
 &\le \frac{(1 - \kappa^*)\,|g^*|}{1 + \sqrt{\kappa^*}} = |g^*|\,(1 - \sqrt{\kappa^*}).
 \end{align*}
 \end{IEEEproof}
-Here $K_\oplus = 0.017279$. At $\rho = 1\au$, $c = 0.3985$ and $1 - \sqrt{\kappa} = 3.7\times10^{-4}$. Where $\delta \le 0.05\au$ we have $|g^*| \le L_{\mathrm{lon}}/\sqrt{\kappa^*} \le 0.0501\au$, hence $\rho^* \ge q_\oplus - 0.0501\au = 0.933\au$ and $1 - \sqrt{\kappa^*} \le 4.0\times10^{-4}$, so the bracket is at most $2.1\times10^{-5}\au$ wide; the widest observed on the catalogue is $1.95\times10^{-5}\au$. The bracket is evaluated numerically (a grid plus local refinement), so the check of Section~IV-B is a numerical certificate, not an interval-arithmetic proof.
+Here $K_\oplus = 0.017279$. At $\rho = 1\au$, $c = 0.3985$ and $1 - \sqrt{\kappa} = 3.7\times10^{-4}$. Where $\delta \le 0.05\au$ we have $|g^*| \le L_{\mathrm{lon}}/\sqrt{\kappa^*} \le 0.0501\au$, hence $\rho^* \ge q_\oplus - 0.0501\au = 0.933\au$ and $1 - \sqrt{\kappa^*} \le 4.0\times10^{-4}$, so the bracket is at most $2.1\times10^{-5}\au$ wide; the widest observed on the catalogue is $1.95\times10^{-5}\au$. The bracket is evaluated numerically (a grid plus local refinement), so the check of Section~\ref{sec:exact} is a numerical certificate, not an interval-arithmetic proof.
 
 \begin{lemma}[Tangent-line distance]\label{lem:lin}
 At a node pair, the distance between the tangent line of $\mathcal{A}$ at $\mathbf{r}(f_\pm)$ and the tangent line of $\mathcal{E}$ at $\mathbf{E}(\lambda_\pm)$ is $\delta_{\mathrm{lin},\pm}$ of Eq.~\eqref{eq:lin}.
