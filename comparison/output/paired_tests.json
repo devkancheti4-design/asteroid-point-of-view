@@ -1,0 +1,101 @@
+{
+ "LogReg": {
+  "errors": 27303,
+  "missed": 21548,
+  "false_alarms": 5755,
+  "b_errors": 26838,
+  "c_errors": 183,
+  "log10_p_errors": -7659.47861431372,
+  "b_missed": 21085,
+  "c_missed": 5,
+  "log10_p_missed": -6329.181509850687
+ },
+ "KNN": {
+  "errors": 27328,
+  "missed": 16682,
+  "false_alarms": 10646,
+  "b_errors": 26861,
+  "c_errors": 181,
+  "log10_p_errors": -7670.0740336928875,
+  "b_missed": 16253,
+  "c_missed": 39,
+  "log10_p_missed": -4786.441997894288
+ },
+ "RandomForest": {
+  "errors": 28324,
+  "missed": 16189,
+  "false_alarms": 12135,
+  "b_errors": 27828,
+  "c_errors": 152,
+  "log10_p_errors": -8014.192210474261,
+  "b_missed": 15776,
+  "c_missed": 55,
+  "log10_p_missed": -4607.775851425364
+ },
+ "XGBoost": {
+  "errors": 25021,
+  "missed": 17936,
+  "false_alarms": 7085,
+  "b_errors": 24525,
+  "c_errors": 152,
+  "log10_p_errors": -7028.206160809184,
+  "b_missed": 17497,
+  "c_missed": 29,
+  "log10_p_missed": -5183.740787230274
+ },
+ "LightGBM": {
+  "errors": 24477,
+  "missed": 18722,
+  "false_alarms": 5755,
+  "b_errors": 23975,
+  "c_errors": 146,
+  "log10_p_errors": -6875.57316007936,
+  "b_missed": 18280,
+  "c_missed": 26,
+  "log10_p_missed": -5426.44038560032
+ },
+ "MLP": {
+  "errors": 22602,
+  "missed": 19313,
+  "false_alarms": 3289,
+  "b_errors": 22122,
+  "c_errors": 168,
+  "log10_p_errors": -6282.149254110381,
+  "b_missed": 18869,
+  "c_missed": 24,
+  "log10_p_missed": -5608.52698593613
+ },
+ "CNN": {
+  "errors": 22657,
+  "missed": 19819,
+  "false_alarms": 2838,
+  "b_errors": 22190,
+  "c_errors": 181,
+  "log10_p_errors": -6278.9231656349075,
+  "b_missed": 19371,
+  "c_missed": 20,
+  "log10_p_missed": -5769.910574628987
+ },
+ "GPBoost": {
+  "errors": 26784,
+  "missed": 26784,
+  "false_alarms": 0,
+  "b_errors": 26316,
+  "c_errors": 180,
+  "log10_p_errors": -7509.482955742048,
+  "b_missed": 26316,
+  "c_missed": 0,
+  "log10_p_missed": -7921.905365893329
+ },
+ "Tuned RF": {
+  "errors": 39846,
+  "missed": 4614,
+  "false_alarms": 35232,
+  "b_errors": 39332,
+  "c_errors": 134,
+  "log10_p_errors": -11492.952094498716,
+  "b_missed": 4263,
+  "c_missed": 117,
+  "log10_p_missed": -1085.7245188007428
+ }
+}

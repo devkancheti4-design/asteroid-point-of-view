@@ -11,7 +11,8 @@
 #   9. the score-sheet comparison recomputed independently (proofs/check_sheet_comparison.py)
 #  10. the Kaggle notebook run on the snapshot reproduces results/ (proofs/check_notebook.py)
 #  11. the statistical evidence against the state of the art recomputed independently (proofs/check_sota_evidence.py)
-# Steps 4-6 and 9-11 read results/; run ./run_all.sh first on a fresh checkout.
+#  12. the standalone model code (comparison/compare_models.py): its saved outputs match results/ in every fold
+# Steps 4-6 and 9-12 read results/; run ./run_all.sh first on a fresh checkout.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 PY="$PWD/.venv/bin/python"
@@ -45,6 +46,7 @@ run "8. Received score sheet and delivered NASA files (SHA-256 verified)" \
 run "9. Score-sheet comparison recomputed independently" "$PY" proofs/check_sheet_comparison.py
 run "10. Kaggle notebook reproduces the results" "$PY" proofs/check_notebook.py
 run "11. Statistical evidence against the state of the art recomputed independently" "$PY" proofs/check_sota_evidence.py
+run "12. Standalone model code reproduces Tables IV and IX fold for fold" "$PY" comparison/compare_models.py --report --strict
 rm -f proofs/pha_law_check
 echo
 if [ "$FAILED" = 0 ]; then echo "ALL CHECKS PASS -> $OUT"; else echo "SOME CHECKS FAILED -> $OUT"; exit 1; fi

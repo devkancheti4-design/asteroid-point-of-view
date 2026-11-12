@@ -1,0 +1,126 @@
+{
+ "max_folds": null,
+ "seconds": 1828.630541086197,
+ "notes": [
+  {
+   "fold": 0,
+   "method": "CNN",
+   "epochs": 15,
+   "val_loss": 0.14754344522953033,
+   "fit_seconds": 200.71700310707092
+  },
+  {
+   "fold": 0,
+   "method": "GPBoost",
+   "random_effect": "asteroid",
+   "re_variance": 6.518455103918762
+  },
+  {
+   "fold": 0,
+   "method": "Tuned RF",
+   "tuned": true,
+   "inner_f1": 0.5516857556136006,
+   "n_estimators": 200,
+   "min_samples_leaf": 8,
+   "max_features": 0.5,
+   "max_depth": null,
+   "class_weight": "balanced_subsample"
+  },
+  {
+   "fold": 1,
+   "method": "CNN",
+   "epochs": 19,
+   "val_loss": 0.14762920141220093,
+   "fit_seconds": 288.6947259902954
+  },
+  {
+   "fold": 1,
+   "method": "GPBoost",
+   "random_effect": "asteroid",
+   "re_variance": 6.5285957527443035
+  },
+  {
+   "fold": 1,
+   "method": "Tuned RF",
+   "tuned": true,
+   "inner_f1": 0.5527194951473767,
+   "n_estimators": 200,
+   "min_samples_leaf": 8,
+   "max_features": 0.5,
+   "max_depth": null,
+   "class_weight": "balanced_subsample"
+  },
+  {
+   "fold": 2,
+   "method": "CNN",
+   "epochs": 25,
+   "val_loss": 0.1476590633392334,
+   "fit_seconds": 407.4590730667114
+  },
+  {
+   "fold": 2,
+   "method": "GPBoost",
+   "random_effect": "asteroid",
+   "re_variance": 6.519020422664612
+  },
+  {
+   "fold": 2,
+   "method": "Tuned RF",
+   "tuned": true,
+   "inner_f1": 0.5406416591654056,
+   "n_estimators": 200,
+   "min_samples_leaf": 8,
+   "max_features": 0.5,
+   "max_depth": null,
+   "class_weight": "balanced_subsample"
+  },
+  {
+   "fold": 3,
+   "method": "CNN",
+   "epochs": 19,
+   "val_loss": 0.1480761468410492,
+   "fit_seconds": 283.32006573677063
+  },
+  {
+   "fold": 3,
+   "method": "GPBoost",
+   "random_effect": "asteroid",
+   "re_variance": 6.5206399824384995
+  },
+  {
+   "fold": 3,
+   "method": "Tuned RF",
+   "tuned": true,
+   "inner_f1": 0.5478320195591065,
+   "n_estimators": 200,
+   "min_samples_leaf": 8,
+   "max_features": 0.5,
+   "max_depth": null,
+   "class_weight": "balanced_subsample"
+  },
+  {
+   "fold": 4,
+   "method": "CNN",
+   "epochs": 21,
+   "val_loss": 0.14473368227481842,
+   "fit_seconds": 200.6301290988922
+  },
+  {
+   "fold": 4,
+   "method": "GPBoost",
+   "random_effect": "asteroid",
+   "re_variance": 6.50776815185459
+  },
+  {
+   "fold": 4,
+   "method": "Tuned RF",
+   "tuned": true,
+   "inner_f1": 0.5543986485378626,
+   "n_estimators": 200,
+   "min_samples_leaf": 8,
+   "max_features": 0.5,
+   "max_depth": null,
+   "class_weight": "balanced_subsample"
+  }
+ ]
+}

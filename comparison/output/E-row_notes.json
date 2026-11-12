@@ -1,0 +1,126 @@
+{
+ "max_folds": null,
+ "seconds": 132.86461114883423,
+ "notes": [
+  {
+   "fold": 0,
+   "method": "LogReg"
+  },
+  {
+   "fold": 0,
+   "method": "KNN"
+  },
+  {
+   "fold": 0,
+   "method": "RandomForest"
+  },
+  {
+   "fold": 0,
+   "method": "XGBoost"
+  },
+  {
+   "fold": 0,
+   "method": "LightGBM"
+  },
+  {
+   "fold": 0,
+   "method": "MLP"
+  },
+  {
+   "fold": 1,
+   "method": "LogReg"
+  },
+  {
+   "fold": 1,
+   "method": "KNN"
+  },
+  {
+   "fold": 1,
+   "method": "RandomForest"
+  },
+  {
+   "fold": 1,
+   "method": "XGBoost"
+  },
+  {
+   "fold": 1,
+   "method": "LightGBM"
+  },
+  {
+   "fold": 1,
+   "method": "MLP"
+  },
+  {
+   "fold": 2,
+   "method": "LogReg"
+  },
+  {
+   "fold": 2,
+   "method": "KNN"
+  },
+  {
+   "fold": 2,
+   "method": "RandomForest"
+  },
+  {
+   "fold": 2,
+   "method": "XGBoost"
+  },
+  {
+   "fold": 2,
+   "method": "LightGBM"
+  },
+  {
+   "fold": 2,
+   "method": "MLP"
+  },
+  {
+   "fold": 3,
+   "method": "LogReg"
+  },
+  {
+   "fold": 3,
+   "method": "KNN"
+  },
+  {
+   "fold": 3,
+   "method": "RandomForest"
+  },
+  {
+   "fold": 3,
+   "method": "XGBoost"
+  },
+  {
+   "fold": 3,
+   "method": "LightGBM"
+  },
+  {
+   "fold": 3,
+   "method": "MLP"
+  },
+  {
+   "fold": 4,
+   "method": "LogReg"
+  },
+  {
+   "fold": 4,
+   "method": "KNN"
+  },
+  {
+   "fold": 4,
+   "method": "RandomForest"
+  },
+  {
+   "fold": 4,
+   "method": "XGBoost"
+  },
+  {
+   "fold": 4,
+   "method": "LightGBM"
+  },
+  {
+   "fold": 4,
+   "method": "MLP"
+  }
+ ]
+}

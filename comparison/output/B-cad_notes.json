@@ -1,0 +1,435 @@
+{
+ "max_folds": null,
+ "seconds": 28.16559886932373,
+ "notes": [
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.5369281768798828
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4518420696258545
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4389817714691162
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.43628907203674316
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4329080581665039
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4514491558074951
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.45197224617004395
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.43333005905151367
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4448697566986084
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4285449981689453
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.43861818313598633
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4454178810119629
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4470200538635254
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4402940273284912
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4419679641723633
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4306669235229492
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4453117847442627
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.46138811111450195
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.44199490547180176
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4426858425140381
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4331319332122803
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.43123817443847656
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4550478458404541
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.44585180282592773
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4444451332092285
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4390280246734619
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4483678340911865
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4414341449737549
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.44204115867614746
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4518122673034668
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4473409652709961
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.43760108947753906
+  },
+  {
+   "method": "CNN",
+   "epochs": 300,
+   "fit_seconds": 0.4232649803161621
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  },
+  {
+   "method": "GPBoost",
+   "random_effect": null
+  },
+  {
+   "method": "Tuned RF",
+   "tuned": false
+  }
+ ]
+}

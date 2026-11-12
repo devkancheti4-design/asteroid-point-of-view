@@ -26,3 +26,8 @@ presentation/build/
 
 # reproduction runs (proofs/compare_runs.py compares them with results/)
 .repro/
+
+# Kaggle upload built by comparison/make_kaggle_package.py, temporary test copies, row-level predictions
+kaggle_upload/
+.v2test/
+comparison/output/predictions_*.csv.gz

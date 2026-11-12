@@ -1,0 +1,217 @@
+% Research papers behind the four methods in comparison/compare_models.py.
+% Checked on 2026-11-12 against Crossref (DOIs), the JMLR and NeurIPS pages and the arXiv API; the Acta Astronomica
+% and NASA/JPL entries are as cited in the paper.
+% Entries that are also in paper/refs.bib keep the same key.
+
+% ------------------------------------------------------------------ Ours: the training-free path rule
+@misc{cneos_groups,
+  author       = {{NASA/JPL Center for Near-Earth Object Studies}},
+  title        = {{NEO} Groups: Definition of potentially hazardous asteroids},
+  howpublished = {\url{https://cneos.jpl.nasa.gov/about/neo_groups.html}},
+  note         = {Accessed 2026-11-11}
+}
+@misc{standish_approx,
+  author       = {Standish, E. M.},
+  title        = {Keplerian Elements for Approximate Positions of the Major Planets},
+  howpublished = {JPL Solar System Dynamics, \url{https://ssd.jpl.nasa.gov/planets/approx_pos.html}},
+  note         = {Accessed 2026-11-11}
+}
+@article{gronchi2005,
+  author  = {Gronchi, Giovanni F.},
+  title   = {An Algebraic Method to Compute the Critical Points of the Distance Function Between Two {K}eplerian Orbits},
+  journal = {Celestial Mechanics and Dynamical Astronomy},
+  volume  = {93},
+  number  = {1--4},
+  pages   = {295--329},
+  year    = {2005},
+  doi     = {10.1007/s10569-005-1623-5}
+}
+@article{wisniowski2013,
+  author  = {Wi{\'s}niowski, T. and Rickman, H.},
+  title   = {Fast Geometric Method for Calculating Accurate Minimum Orbit Intersection Distances ({MOIDs})},
+  journal = {Acta Astronomica},
+  volume  = {63},
+  number  = {2},
+  pages   = {293--307},
+  year    = {2013}
+}
+@article{hedo2018,
+  author  = {Hedo, Jos{\'e} M. and Ru{\'i}z, Manuel and Pel{\'a}ez, Jes{\'u}s},
+  title   = {On the minimum orbital intersection distance computation: a new effective method},
+  journal = {Monthly Notices of the Royal Astronomical Society},
+  volume  = {479},
+  number  = {3},
+  pages   = {3288--3299},
+  year    = {2018},
+  doi     = {10.1093/mnras/sty1598}
+}
+
+% ------------------------------------------------------------------ Model 1: CNN
+@article{lecun1998,
+  author  = {LeCun, Yann and Bottou, L{\'e}on and Bengio, Yoshua and Haffner, Patrick},
+  title   = {Gradient-based learning applied to document recognition},
+  journal = {Proceedings of the IEEE},
+  volume  = {86},
+  number  = {11},
+  pages   = {2278--2324},
+  year    = {1998},
+  doi     = {10.1109/5.726791}
+}
+@article{kiranyaz2021,
+  author  = {Kiranyaz, Serkan and Avci, Onur and Abdeljaber, Osama and Ince, Turker and Gabbouj, Moncef and Inman, Daniel J.},
+  title   = {{1D} convolutional neural networks and applications: A survey},
+  journal = {Mechanical Systems and Signal Processing},
+  volume  = {151},
+  pages   = {107398},
+  year    = {2021},
+  doi     = {10.1016/j.ymssp.2020.107398}
+}
+@inproceedings{kingma2015,
+  author    = {Kingma, Diederik P. and Ba, Jimmy},
+  title     = {Adam: A Method for Stochastic Optimization},
+  booktitle = {3rd International Conference on Learning Representations (ICLR 2015)},
+  year      = {2015},
+  note      = {arXiv:1412.6980}
+}
+@article{srivastava2014,
+  author  = {Srivastava, Nitish and Hinton, Geoffrey and Krizhevsky, Alex and Sutskever, Ilya and Salakhutdinov, Ruslan},
+  title   = {Dropout: A Simple Way to Prevent Neural Networks from Overfitting},
+  journal = {Journal of Machine Learning Research},
+  volume  = {15},
+  number  = {56},
+  pages   = {1929--1958},
+  year    = {2014},
+  url     = {https://jmlr.org/papers/v15/srivastava14a.html}
+}
+@inproceedings{paszke2019,
+  author    = {Paszke, Adam and Gross, Sam and Massa, Francisco and Lerer, Adam and Bradbury, James and Chanan, Gregory and Killeen, Trevor and Lin, Zeming and Gimelshein, Natalia and Antiga, Luca and Desmaison, Alban and K{\"o}pf, Andreas and Yang, Edward and DeVito, Zachary and Raison, Martin and Tejani, Alykhan and Chilamkurthy, Sasank and Steiner, Benoit and Fang, Lu and Bai, Junjie and Chintala, Soumith},
+  title     = {{PyTorch}: An Imperative Style, High-Performance Deep Learning Library},
+  booktitle = {Advances in Neural Information Processing Systems 32 (NeurIPS 2019)},
+  year      = {2019},
+  note      = {arXiv:1912.01703}
+}
+% CNNs in asteroid work: on survey images (detection), not on hazard tables
+@article{chyba2021,
+  author  = {Chyba Rabeendran, Amandin and Denneau, Larry},
+  title   = {A Two-stage Deep Learning Detection Classifier for the {ATLAS} Asteroid Survey},
+  journal = {Publications of the Astronomical Society of the Pacific},
+  volume  = {133},
+  number  = {1021},
+  pages   = {034501},
+  year    = {2021},
+  doi     = {10.1088/1538-3873/abc900}
+}
+@article{bacu2023,
+  author  = {Bacu, Victor and Nandra, Constantin and Sabou, Adrian and Stefanut, Teodor and Gorgan, Dorian},
+  title   = {Assessment of Asteroid Classification Using Deep Convolutional Neural Networks},
+  journal = {Aerospace},
+  volume  = {10},
+  number  = {9},
+  pages   = {752},
+  year    = {2023},
+  doi     = {10.3390/aerospace10090752}
+}
+
+% ------------------------------------------------------------------ Model 2: GPBoost
+@article{sigrist2022,
+  author  = {Sigrist, Fabio},
+  title   = {Gaussian Process Boosting},
+  journal = {Journal of Machine Learning Research},
+  volume  = {23},
+  number  = {232},
+  pages   = {1--46},
+  year    = {2022},
+  url     = {https://jmlr.org/papers/v23/20-322.html}
+}
+@article{sigrist2023,
+  author  = {Sigrist, Fabio},
+  title   = {Latent {G}aussian Model Boosting},
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  volume  = {45},
+  number  = {2},
+  pages   = {1894--1905},
+  year    = {2023},
+  doi     = {10.1109/TPAMI.2022.3168152}
+}
+@article{friedman2001,
+  author  = {Friedman, Jerome H.},
+  title   = {Greedy function approximation: A gradient boosting machine},
+  journal = {The Annals of Statistics},
+  volume  = {29},
+  number  = {5},
+  pages   = {1189--1232},
+  year    = {2001},
+  doi     = {10.1214/aos/1013203451}
+}
+@inproceedings{ke2017,
+  author    = {Ke, Guolin and Meng, Qi and Finley, Thomas and Wang, Taifeng and Chen, Wei and Ma, Weidong and Ye, Qiwei and Liu, Tie-Yan},
+  title     = {{LightGBM}: A Highly Efficient Gradient Boosting Decision Tree},
+  booktitle = {Advances in Neural Information Processing Systems 30},
+  pages     = {3146--3154},
+  year      = {2017}
+}
+
+% ------------------------------------------------------------------ Model 3: tuned random forest
+@article{breiman2001,
+  author  = {Breiman, Leo},
+  title   = {Random Forests},
+  journal = {Machine Learning},
+  volume  = {45},
+  number  = {1},
+  pages   = {5--32},
+  year    = {2001},
+  doi     = {10.1023/A:1010933404324}
+}
+@article{bergstra2012,
+  author  = {Bergstra, James and Bengio, Yoshua},
+  title   = {Random Search for Hyper-Parameter Optimization},
+  journal = {Journal of Machine Learning Research},
+  volume  = {13},
+  number  = {10},
+  pages   = {281--305},
+  year    = {2012},
+  url     = {https://jmlr.org/papers/v13/bergstra12a.html}
+}
+@article{probst2019,
+  author  = {Probst, Philipp and Wright, Marvin N. and Boulesteix, Anne-Laure},
+  title   = {Hyperparameters and tuning strategies for random forest},
+  journal = {WIREs Data Mining and Knowledge Discovery},
+  volume  = {9},
+  number  = {3},
+  pages   = {e1301},
+  year    = {2019},
+  doi     = {10.1002/widm.1301}
+}
+@article{pedregosa2011,
+  author  = {Pedregosa, Fabian and Varoquaux, Ga{\"e}l and Gramfort, Alexandre and Michel, Vincent and Thirion, Bertrand and Grisel, Olivier and others},
+  title   = {Scikit-learn: Machine Learning in {P}ython},
+  journal = {Journal of Machine Learning Research},
+  volume  = {12},
+  pages   = {2825--2830},
+  year    = {2011}
+}
+% Random forests in PHA classification (all on NeoWs-derived tables, none split by asteroid)
+@article{malakouti2023,
+  author  = {Malakouti, Seyed Matin and Menhaj, Mohammad Bagher and Suratgar, Amir Abolfazl},
+  title   = {Machine learning techniques for classifying dangerous asteroids},
+  journal = {MethodsX},
+  volume  = {11},
+  pages   = {102337},
+  year    = {2023},
+  doi     = {10.1016/j.mex.2023.102337}
+}
+@article{nair2025,
+  author  = {Nair, Rekha R. and Babu, Tina},
+  title   = {Effective Hazard Categorization of Near-{E}arth Objects with Random Forest Techniques},
+  journal = {Procedia Computer Science},
+  volume  = {259},
+  pages   = {1682--1692},
+  year    = {2025},
+  doi     = {10.1016/j.procs.2025.04.123}
+}
+@misc{chandra2025,
+  author       = {Chandra, Sunkalp},
+  title        = {Enhanced Predictive Modeling for Hazardous Near-{E}arth Object Detection: A Comparative Analysis of Advanced Resampling Strategies and Machine Learning Algorithms in Planetary Risk Assessment},
+  howpublished = {arXiv:2508.15106},
+  year         = {2025}
+}

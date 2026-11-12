@@ -1,6 +1,6 @@
 # Verification report
 
-Generated 2026-11-12 04:39 UTC on Darwin arm64 by proofs/verify_all.sh.
+Generated 2026-11-12 13:32 UTC on Darwin arm64 by proofs/verify_all.sh.
 
 ## 1. Decision law equals its specification on all 2^32 inputs
 
@@ -26,7 +26,7 @@ pha_law vs specification over all 4294967296 int32 inputs: 0 mismatches
 K1: nodes on the reference plane, |r| law, orthonormal basis, rotation-matrix agreement
   worst |z at nodes| 1.04e-15 au, | |r| - p/(1+e cos f) | 7.11e-15, |B B^T - I| 4.44e-16, basis vs matrices 2.22e-16
 K2: exact MOID vs the independent brute force; bound order L0 <= L_lon <= MOID <= U_lon <= U_node
-  310 orbits (300 synthetic + 10 edge cases) in 38 s
+  310 orbits (300 synthetic + 10 edge cases) in 58 s
   |MOID - brute force|: max 2.56e-11 au, median 2.22e-16;  bound order violated on 0;  uncertified 0
   certified gap U_lon - L_lon where MOID < 0.2 au: max 9.40e-05 au (n=110)
 K2: vectorised moid_batch vs moid (elliptic)
@@ -231,7 +231,7 @@ cad_earth.csv          /Users/kanchetidevieswar/near earth objects (neo)/data/pr
 cad.csv                /Users/kanchetidevieswar/near earth objects (neo)/data/external/cad.csv
 sentry_risk_list.csv   /Users/kanchetidevieswar/near earth objects (neo)/data/external/sentry_risk_list.csv
 scout.csv              /Users/kanchetidevieswar/near earth objects (neo)/data/external/scout.csv
-42,888 near-Earth asteroids (2,551 PHAs): path-to-path distance for all of them in 12.2 s   [paper: 42,888 asteroids, 2,551 PHAs]
+42,888 near-Earth asteroids (2,551 PHAs): path-to-path distance for all of them in 18.1 s   [paper: 42,888 asteroids, 2,551 PHAs]
 |delta - JPL MOID|: median 1.03e-04 au, 99th percentile 6.03e-04 au, max 1.83e-03 au   [paper: 1.03e-04, 6.03e-04, 1.83e-03]
 same PHA verdict from our delta as from JPL's MOID: 99.979%   [paper: 99.979%]
 paper: ours accuracy 0.99865, F1 0.98859, MCC 0.98788; tangent line 0.99263 / 0.93811
@@ -247,7 +247,7 @@ paper, grouped: no baseline above 0.9263 accuracy (MLP) or F1 0.428 (random fore
 CAD table: 33 rows, 33 scored (an orbit and H in JPL SBDB), 2 PHAs -> TP 2, FP 0, FN 0, TN 31; accuracy 1.0000, F1 1.0000
 Sentry risk list: 2,242 rows, 2,241 scored (an orbit and H in JPL SBDB), 15 PHAs -> TP 15, FP 0, FN 0, TN 2226; accuracy 1.0000, F1 1.0000
 Scout: 72 unconfirmed candidates, 0 of them in JPL SBDB (no ground truth). The rule on Scout's own MOID and H flags 1:
-11,054 well-determined asteroids (2,039 hazardous), 48 clones each, 90 s
+11,054 well-determined asteroids (2,039 hazardous), 48 clones each, 92 s
 paper (short-arc profiles, scale 1): point rule 0.9846 / MCC 0.9489 / Brier 0.0154; path cloud 0.9846 / 0.9487 / 0.0105
 
 -- comparison with results/
@@ -282,6 +282,116 @@ PASS RandomForest: errors 28,324, missed 16,189, log10 p -7375.5 / -4089.6, in J
 PASS Tuned RF: errors 39,846, missed 4,614, log10 p -10748.9 / -853.2, in JSON and Table
 PASS summary table carries the JSON values
 all checks passed
+```
+
+**PASS**
+
+## 12. Standalone model code reproduces Tables IV and IX fold for fold
+
+```
+outputs: /Users/kanchetidevieswar/near earth objects (neo)/comparison/output
+RESULTS (means over folds or repeats; Table IV and Table IX of the paper)
+  B-cad: 1 fold(s) or repeat(s)
+    method                           accuracy        f1   paper
+    Ours: path rule (training-free)    100.00     1.000   same
+    CNN                                 93.94     0.000   same
+    GPBoost                             90.91     0.000   same
+    Tuned RF                            93.94     0.000   same
+  B-sentry: 5 fold(s) or repeat(s)
+    method                           accuracy        f1   paper
+    CNN                                 99.56     0.656   same
+    GPBoost                             99.70     0.756   same
+    Tuned RF                            99.67     0.784   same
+    Ours: path rule (training-free)    100.00     1.000   same
+  E-grouped: 5 fold(s) or repeat(s)
+    method                           accuracy        f1       mcc   paper
+    Ours: path rule (training-free)     99.79     0.988     0.987   same
+    LogReg                              91.09     0.277     0.266   same
+    KNN                                 91.09     0.425     0.381   same
+    RandomForest                        90.76     0.428     0.380   same
+    XGBoost                             91.84     0.414     0.388   same
+    LightGBM                            92.02     0.397     0.382   same
+    MLP                                 92.63     0.398     0.410   same
+  E-row: 5 fold(s) or repeat(s)
+    method                           accuracy        f1       mcc   paper
+    Ours: path rule (training-free)     99.79     0.988     0.987   same
+    LogReg                              91.12     0.279     0.268   same
+    KNN                                 92.48     0.514     0.479   same
+    RandomForest                        94.74     0.676     0.650   same
+    XGBoost                             93.27     0.513     0.500   same
+    LightGBM                            93.21     0.479     0.480   same
+    MLP                                 92.67     0.400     0.413   same
+  C-grouped: 5 fold(s) or repeat(s)
+    method                           accuracy        f1       mcc   roc_auc   paper
+    Ours: path rule (training-free)     99.79     0.988     0.987     1.000   same
+    CNN                                 92.61     0.381     0.401     0.942   same
+    GPBoost                             91.26     0.000     0.000     0.919   same
+    Tuned RF                            87.00     0.527     0.509     0.937   same
+  C-row: 5 fold(s) or repeat(s)
+    method                           accuracy        f1       mcc   roc_auc   paper
+    Ours: path rule (training-free)     99.79     0.988     0.987     1.000   same
+    CNN                                 92.67     0.380     0.405     0.943   same
+    GPBoost                             99.90     0.994     0.994     1.000   same
+    Tuned RF                            89.42     0.595     0.585     0.958   same
+
+FOLD-BY-FOLD CHECK against the paper's stored results
+  IDENTICAL B-cad     Ours: path rule (training-free)  1 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL B-cad     CNN                              1 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL B-cad     GPBoost                          1 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL B-cad     Tuned RF                         1 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL B-sentry  CNN                              5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL B-sentry  GPBoost                          5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL B-sentry  Tuned RF                         5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL B-sentry  Ours: path rule (training-free)  5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL E-grouped Ours: path rule (training-free)  5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL E-grouped LogReg                           5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL E-grouped KNN                              5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL E-grouped RandomForest                     5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL E-grouped XGBoost                          5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL E-grouped LightGBM                         5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL E-grouped MLP                              5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL E-row     Ours: path rule (training-free)  5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL E-row     LogReg                           5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL E-row     KNN                              5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL E-row     RandomForest                     5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL E-row     XGBoost                          5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL E-row     LightGBM                         5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL E-row     MLP                              5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL C-grouped Ours: path rule (training-free)  5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL C-grouped CNN                              5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL C-grouped GPBoost                          5 fold(s), largest difference 1.1e-05 (pr_auc)
+  IDENTICAL C-grouped Tuned RF                         5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL C-row     Ours: path rule (training-free)  5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL C-row     CNN                              5 fold(s), largest difference 0.0e+00 (accuracy)
+  IDENTICAL C-row     GPBoost                          5 fold(s), largest difference 3.3e-08 (pr_auc)
+  IDENTICAL C-row     Tuned RF                         5 fold(s), largest difference 0.0e+00 (accuracy)
+
+CLAIM CHECK: on every honest evaluation the rule beats each model in every fold on accuracy, F1 and MCC
+  note  C-row: GPBoost is not beaten in every fold (leaky row split: a model can memorise asteroids it has seen)
+  PASS: 15 model-unit comparisons on honest evaluations
+
+EXACT PAIRED McNEMAR TEST on the grouped folds, from the row-level predictions
+  306,590 rows, 5 fold(s); b = model wrong and rule right, c = rule wrong and model right; p is one-sided
+  method                            errors  missed  false+    b / c (all rows)   log10 p    b / c (PHA rows)   log10 p
+  Ours: path rule (training-free)      648     468     180
+  LogReg                            27,303  21,548   5,755        26,838 / 183   -7659.5          21,085 / 5   -6329.2
+  KNN                               27,328  16,682  10,646        26,861 / 181   -7670.1         16,253 / 39   -4786.4
+  RandomForest                      28,324  16,189  12,135        27,828 / 152   -8014.2         15,776 / 55   -4607.8
+  XGBoost                           25,021  17,936   7,085        24,525 / 152   -7028.2         17,497 / 29   -5183.7
+  LightGBM                          24,477  18,722   5,755        23,975 / 146   -6875.6         18,280 / 26   -5426.4
+  MLP                               22,602  19,313   3,289        22,122 / 168   -6282.1         18,869 / 24   -5608.5
+  CNN                               22,657  19,819   2,838        22,190 / 181   -6278.9         19,371 / 20   -5769.9
+  GPBoost                           26,784  26,784       0        26,316 / 180   -7509.5          26,316 / 0   -7921.9
+  Tuned RF                          39,846   4,614  35,232        39,332 / 134  -11493.0         4,263 / 117   -1085.7
+  every model makes more errors and misses more PHA approaches than the rule; every p < 10^-6278 (all rows) and < 10^-1085 (PHA rows)
+  the confusion counts that the paper decoded from its stored metrics (Table X) equal these predictions for every model, and every actual p is at or below the paper's least-favourable bound
+
+VERDICT
+  PASS our training-free rule gives the paper's numbers in every fold
+  PASS every trained model gives the paper's numbers in every fold
+  PASS on every honest evaluation the rule beats every model in every fold (accuracy, F1 and MCC)
+  PASS exact paired tests: the rule is more accurate and misses fewer PHA approaches than every model (p < 10^-1085)
+  all six units are complete
 ```
 
 **PASS**
