@@ -1,11 +1,22 @@
 \documentclass[conference]{IEEEtran}
+% Tectonic compiles with XeTeX, which has no definition for IEEEtran's Times, Helvetica and Courier
+% (ptm, phv, pcr). Without the lines below, LaTeX falls back to Latin Modern regular for every text font,
+% losing bold, italics, small caps and monospace. The TeX Gyre fonts are metric clones of the three; math
+% keeps Computer Modern, as in IEEE's pdfLaTeX template.
+\usepackage[no-math]{fontspec}
+\setmainfont{texgyretermes}[Extension=.otf, UprightFont=*-regular, BoldFont=*-bold,
+  ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
+\setsansfont{texgyreheros}[Extension=.otf, UprightFont=*-regular, BoldFont=*-bold,
+  ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
+\setmonofont{texgyrecursor}[Extension=.otf, UprightFont=*-regular, BoldFont=*-bold,
+  ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{array,tabularx}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 \usepackage{cite}
-\usepackage{url}
+\usepackage[hyphens]{url}  % long URLs may also break after a hyphen; otherwise lines around them stretch
 \usepackage[hidelinks]{hyperref}
 
 \newcommand{\au}{\,\mathrm{au}}
