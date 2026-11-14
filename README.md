@@ -4,6 +4,20 @@ Code, data pipeline and paper for **"The Asteroid's Point of View: Path Geometry
 
 Prior machine-learning work classifies potentially hazardous asteroids (PHAs) from Earth's point of view: one row per close approach, with miss distance and relative velocity. This project describes each asteroid only by its own orbit (path) and size, and judges hazard from the geometry of that path relative to Earth's orbit as a fixed curve, so the timing of individual encounters drops out.
 
+## The model in one file
+
+[`model/path_rule_model.py`](model/path_rule_model.py) is the training-free, deterministic path rule on its own.
+It needs only numpy and works on a fresh clone; see [model/README.md](model/README.md).
+
+```bash
+python model/path_rule_model.py   # all 42,888 labelled NEAs in about 12 s: accuracy 99.86%, F1 0.989
+```
+
+```python
+from path_rule_model import predict
+pha, score, distance_au = predict(a, e, i, om, w, H)   # orbital elements (degrees) and absolute magnitude
+```
+
 ## Main results (data retrieved 2026-11-11)
 
 | Setting | Method | Accuracy | F1 (PHA) | MCC |
@@ -71,6 +85,7 @@ One Sentry object has no absolute magnitude in JPL's catalogue and is not scored
 | `proofs/check_notebook.py` | Runs the Kaggle notebook on the snapshot and checks that it reproduces `results/` (every asteroid's distance, the 5-fold, temporal, same-fold and uncertainty results) |
 | `proofs/compare_runs.py`, `proofs/REPRODUCTION.md` | File-by-file comparison of two complete runs (every number in `results/` and every generated table), and the record of the clean-clone reproductions |
 | `presentation/make_video.py` | Narrated 4.5-minute presentation video (`presentation/asteroids_point_of_view.mp4`); needs macOS `say` and ffmpeg; checks every on-screen number against `results/` first |
+| `model/` | The training-free path rule as one standalone, deterministic file (`path_rule_model.py`, numpy only) with a `predict` function and a demo on the NASA/JPL catalogue |
 | `comparison/` | The full model code of the comparison in one standalone file (`compare_models.py`: our rule, the CNN, GPBoost, the tuned random forest and the six prior-work models). It reproduces Tables IV and IX fold for fold, checks them against `results/` and runs exact paired McNemar tests from the row-level predictions. Also: every method's research papers with links (`README.md`, `references.bib`), the Kaggle notebook and step-by-step guide (`kaggle_notebook.ipynb`, `KAGGLE_GUIDE.md`), and `make_kaggle_package.py`, which builds the one zip to upload to Kaggle (`kaggle_upload/asteroid_model_comparison.zip`) |
 | `notebooks/asteroid_point_of_view_kaggle.ipynb` | Self-contained Kaggle notebook of the method: path geometry for every NEA, the 5-fold and temporal evaluation, Earth's view vs the asteroid's view on NASA CAD, the CAD/Sentry/Scout tables and the orbit-uncertainty simulation; prints the paper's value next to each number |
 | `src/make_figures.py`, `src/make_tables.py` | Every figure and table in the paper, generated from `results/` |
